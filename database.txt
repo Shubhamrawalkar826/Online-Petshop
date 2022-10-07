@@ -1,4 +1,0 @@
-insert into pet values(1,"2002-02-12","image1",222,1,1);
-
-insert into orders1 values(2,"dog",2,1,1,1000);
-insert into orders1 values(1,"dog",1,1,1,1000);
