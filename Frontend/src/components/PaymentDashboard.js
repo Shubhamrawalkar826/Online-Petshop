@@ -15,12 +15,11 @@ export default class PaymentDashboard extends Component {
         let cust = JSON.parse(sessionStorage.getItem("customer"));
         console.log(cust);
         this.setState({
-
             address: cust.address,
-
-
         });
-
+        if (sessionStorage.getItem("role") == null) {
+            window.location.href = "/";
+        }
     }
     render() {
         return (

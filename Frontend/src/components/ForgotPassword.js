@@ -47,11 +47,13 @@ export default class ForgotPassword extends Component {
                     message: response.data,
                     show: true
                 });
-                console.log(this.state.message);
+                console.log(response.data);
             })
             .catch(error => {
-                this.setState({ msg: error })
-                toast.error(this.state.message, { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
+                this.setState({
+                    email: ''
+                })
+                toast.error("Invalid Email Id", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
                 //err.response.data => DTO on the server side : ErrorResponse
 
 
@@ -78,8 +80,8 @@ export default class ForgotPassword extends Component {
         LoginAPI.savechanges(this.state.message, val).then(
             (resp) => {
                 console.log(resp.data);
+                toast.success(resp.data);
                 this.setState({
-                    msg: resp.data,
                     email: '',
                     password: '',
                     flag: true,
@@ -104,7 +106,7 @@ export default class ForgotPassword extends Component {
                 </div>
                 <form className="container rounded bg-light pt-2" style={{ width: "30vw" }}>
                     <div className="form-group">
-                        <label>Enter Email to be searched:</label>
+                        <label>Enter Your Email</label>
                         <input id="email" type="email" className="form-control text-center mt-3" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange} />
                     </div><br></br>
                     <div className="row my-7">
@@ -112,7 +114,6 @@ export default class ForgotPassword extends Component {
                             <button className="btn btn-primary text-uppercase mb-3 offset-8" onClick={this.verifyemail}>Search</button>
                             <ToastContainer />
                         </div>
-                        <h5>{this.state.msg}</h5>
                     </div>
                 </form><br></br>
 
@@ -124,7 +125,7 @@ export default class ForgotPassword extends Component {
                         <Modal.Title>Updating password</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <input type="password" className="form-control" placeholder="Enter password " name="password" value={this.state.password} onChange={this.onChange} required />
+                        <input type="password" className="form-control" placeholder="Enter password " name="password" value={this.state.password} onChange={this.onChange} required /><br></br>
                         <Button variant="primary" onClick={() => { this.saveChanges(this.state.password) }}>
                             Save Changes
                         </Button>

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-//import './LandingPage.css';
 import { NavLink } from 'react-router-dom';
 
 // const toLogin = () => {
@@ -8,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 const Home = () => {
 
-    useEffect(() => {
+    /*useEffect(() => {
         const reloadCount = sessionStorage.getItem('reloadCount');
         if (reloadCount < 2) {
             sessionStorage.setItem('reloadCount', String(reloadCount + 1));
@@ -16,9 +15,7 @@ const Home = () => {
         } else {
             sessionStorage.removeItem('reloadCount');
         }
-    }, []);
-
-
+    }, []);*/
 
     let role = (sessionStorage.getItem("role"));
     console.log(role);

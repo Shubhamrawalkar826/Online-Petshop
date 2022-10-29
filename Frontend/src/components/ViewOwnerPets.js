@@ -183,7 +183,7 @@ export default class ViewOwnerPets extends Component {
         return (
             <div>
                 <CustNavBar />
-                {this.state.users.length === 0 ? <h3>No Pets Sold yet</h3> :
+                {this.state.users.length === 0 ? <h3 className='text-light'>No Pets Sold yet</h3> :
                     <div> <h3 className='text-light'>Your Pets For Sell</h3>
 
                         <table className="table text-light table-bordered">
