@@ -43,6 +43,10 @@ class CustomerregistrationAPI {
     getallpets() {
         return axios.get(USER_LOGIN_BASE_URL + '/getallpets');
     }
+
+    addbreedtype(breedtypeinfo) {
+        return axios.post(USER_LOGIN_BASE_URL + '/savebreed', breedtypeinfo)
+    }
 }
 
 export default new CustomerregistrationAPI();

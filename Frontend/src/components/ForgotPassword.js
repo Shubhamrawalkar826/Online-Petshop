@@ -101,7 +101,7 @@ export default class ForgotPassword extends Component {
                         <h2 className="text-light offset-6">Forgot Password</h2>
                     </div>
                     <div className="col-sm-4">
-                        <Nav.Link as={Link} to='/home'><h6 className='btn btn-secondary text-uppercase offset-8'>Go Back</h6></Nav.Link>
+                        <Nav.Link as={Link} to='/login'><h6 className='btn btn-secondary text-uppercase offset-8'>Go Back</h6></Nav.Link>
                     </div>
                 </div>
                 <form className="container rounded bg-light pt-2" style={{ width: "30vw" }}>
@@ -117,7 +117,7 @@ export default class ForgotPassword extends Component {
                     </div>
                 </form><br></br>
 
-                {this.state.flag === true ? <Nav.Link as={Link} to='/login'><h6 className='btn btn-success text-uppercase'>Click here to login</h6></Nav.Link> : ""}
+                {this.state.flag === true ? <Nav.Link as={Link} to='/login'><h6 className='btn btn-lg btn-success text-uppercase'>Click here to login</h6></Nav.Link> : ""}
 
                 <span id="span"></span>
                 <Modal show={this.state.show} onHide={this.handleClose}>

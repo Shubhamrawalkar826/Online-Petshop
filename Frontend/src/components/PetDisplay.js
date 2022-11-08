@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
 function PetDisplay(props) {
 
     const data = props.users.image;
@@ -26,7 +27,7 @@ function PetDisplay(props) {
             <td>{props.users.pid}</td>
             <td>
                 <img
-                    style={{ height: "130px", width: "80%", margin: "auto" }}
+                    style={{ height: "130px", margin: "auto" }}
                     src={imgUrl}
                     alt=""
                 />

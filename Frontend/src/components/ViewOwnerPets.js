@@ -158,7 +158,6 @@ export default class ViewOwnerPets extends Component {
 
     handleshow(value) {
         this.setState({ show: true, upid: value })
-        alert("show loaded" + value)
     }
 
     onChange = e => {

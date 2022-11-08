@@ -11,6 +11,7 @@ export default class PetRegisteration extends Component {
         this.state = {
             // value: '1',
             //selectbreed: '',
+            bredname: '',
             typelist: [],
             breedlist: [],
             pettypeid: null,
@@ -29,7 +30,7 @@ export default class PetRegisteration extends Component {
         //  this.handleSubmit1 = this.handleSubmit1.bind(this);
         this.onChange = this.onChange.bind(this);
         this.ownerreg = this.ownerreg.bind(this);
-
+        this.addNewBreed = this.addNewBreed.bind(this);
     }
 
     handleChange(event) {
@@ -145,7 +146,7 @@ export default class PetRegisteration extends Component {
                     price: ''
                 });
                 console.log(res);
-                toast.success(this.state.message);
+                toast.success('registration successful.');
             });
 
         /*  PetownerregistrationAPI.petreg(user).then(() => {
@@ -165,6 +166,28 @@ export default class PetRegisteration extends Component {
           });*/
     }
     onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+    addNewBreed(ptypeid) {
+        if (this.state.bredname === '') {
+            toast.error("Please enter breedname", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+            return false;
+        }
+        console.log(ptypeid);
+        let breedtypeinfo = {
+            breedname: this.state.bredname,
+            typeid: ptypeid
+        }
+        CustomerregistrationAPI.addbreedtype(breedtypeinfo).then((res) => {
+            toast.success("Breed Added Successfully");
+            console.log(res.data);
+            this.setState({
+                breedid: res.data.breedtypeid
+            })
+            console.log(res.data.breedtypeid);
+        }).catch(() => {
+            toast.error("registration failed", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
+        })
+    }
 
     render() {
         return (
@@ -189,11 +212,12 @@ export default class PetRegisteration extends Component {
                                 Select type of breed:
                                 <Form.Select value={this.state.breedid} onChange={this.handleChange1}>
                                     <option selected disabled>---select---</option>
+                                    <option>other</option>
                                     {this.state.breedlist.map((breedlist) => (<option key={breedlist.breedtypeid} value={breedlist.breedtypeid}>{breedlist.breedname}</option>))}
                                 </Form.Select>
                             </Form.Label>
                         </Form>
-                    }</div>
+                    }{this.state.breedid === "other" ? <Form><Form.Control name="bredname" type="text" value={this.state.bredname} onChange={this.onChange} placeholder="Enter new breedtype"></Form.Control><Button onClick={() => this.addNewBreed(this.state.pettypeid)}>Add new breed</Button></Form> : ""}</div>
                     <Form className="container bg-dark pt-2">
                         <Form.Group className="mb-4" controlId="formBasicPassword">
                             <Form.Control className="text-center" id="image" name="image" type="file" value={this.state.image} onChange={this.onChange} placeholder="choose image" />
