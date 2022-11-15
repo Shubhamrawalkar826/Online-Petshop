@@ -27,7 +27,7 @@ public interface PetRespository extends JpaRepository<Pet, Integer> {
 	public List<Pet> getAll();
 	
 	
-	@Query(value="select p.* from pet p inner join breedtype b on b.breedtypeid = p.breedtypeid inner join pettype t on t.typeid=b.breedtypeid where p.cid= ?1 ;",nativeQuery = true)
+	@Query(value="select p.* from pet p inner join breedtype b on b.breedtypeid = p.breedtypeid inner join pettype t on t.typeid=b.typeid where p.cid= ?1 ;",nativeQuery = true)
 	public List<Pet> getByCustomerid(int cid);
 	
 	@Modifying

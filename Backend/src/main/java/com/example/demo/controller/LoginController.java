@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,14 +43,15 @@ public class LoginController {
 	}
 	
 	@PostMapping("/forgot-password")
-	public String forgotPassword(@RequestParam String email) {
+	public ResponseEntity<String> forgotPassword(@RequestParam String email) {
 
 		String response = lservice.forgotPassword(email);
 
 		if (!response.startsWith("Invalid")) {
 			response = "http://localhost:5010/reset-password?token=" + response;
+			return ResponseEntity.ok().body(response);
 		}
-		return response;
+		return ResponseEntity.badRequest().body(response);
 	}
 
 	@PutMapping("/reset-password")

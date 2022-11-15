@@ -24,14 +24,14 @@ function PetDisplay(props) {
         <>
             <td className="visually-hidden">{props.users.pid}</td>
             <td>{props.users.pid}</td>
-            <td>
+            <td style={{ width: "20%" }}>
                 <img
-                    style={{ height: "130px", width: "80%", margin: "auto" }}
+                    style={{ height: "130px", margin: "auto" }}
                     src={imgUrl}
                     alt=""
                 />
             </td>
-            <td>{props.users.breedtypeid.breedname}</td>
+            <td style={{ width: "15%" }}>{props.users.breedtypeid.breedname}</td>
             <td>{props.users.age}</td>
             <td>{props.users.price}</td>
 

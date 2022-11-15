@@ -29,32 +29,34 @@ export default class CustNavBar extends Component {
 
     render() {
         return (
-            <><div><h3 className='text-light text-left offset-9'>Hi! {this.state.custfname}</h3></div>
-
-                <Navbar expand="lg">
+            <>
+                <Navbar className='text-light' expand="lg">
                     <Container>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav>
-                                <Nav.Link className="btn btn-link btn-primary text-light text-uppercase text-decoration-none " as={Link} to="/searchpet">Search pet</Nav.Link>
+                                <Nav.Link className="btn btn-link text-light btn-primary text-uppercase text-decoration-none " as={Link} to="/searchpet">Search pet</Nav.Link>
                             </Nav>
                             <Nav>
-                                <Nav.Link className="btn btn-link btn-primary text-light text-uppercase text-decoration-none " as={Link} to='/viewopets'>My Pets</Nav.Link>
+                                <Nav.Link className="btn btn-link text-light btn-primary text-uppercase text-decoration-none " as={Link} to='/viewopets'>My Pets</Nav.Link>
                             </Nav>
                             <Nav className='me-auto'>
-                                <Nav.Link className="btn btn-link btn-primary text-light text-uppercase text-decoration-none " as={Link} to="/petregistration">Add pet</Nav.Link>
+                                <Nav.Link className="btn btn-link text-light btn-primary text-uppercase text-decoration-none " as={Link} to="/petregistration">Sell pet</Nav.Link>
                             </Nav>
                             <Nav>
-                                <Nav.Link className="btn btn-link btn-primary text-light text-uppercase text-decoration-none " as={Link} to='/cart'>Cart</Nav.Link>
+                                <Nav.Link className="btn btn-link text-light btn-primary text-uppercase text-decoration-none " as={Link} to='/cart'>Cart</Nav.Link>
                             </Nav>
                             <Nav >
-                                <Nav.Link className=" btn btn-link btn-primary text-light text-uppercase text-decoration-none " as={Link} to="/profile">Profile</Nav.Link>
+                                <Nav.Link className=" btn btn-link text-light btn-primary text-uppercase text-decoration-none " as={Link} to="/profile">Profile</Nav.Link>
                             </Nav>
                             <Nav className='justify-content-end'>
-                                <Nav.Link as={Link} onClick={this.logout} className="btn btn-link btn-danger text-light offset-10 text-uppercase text-decoration-none " to="/home">Logout</Nav.Link>
+                                <Nav.Link as={Link} onClick={this.logout} className="btn btn-link text-light btn-danger offset-10 text-uppercase text-decoration-none " to="/home">Logout</Nav.Link>
                             </Nav>
+
                         </Navbar.Collapse></Container>
-                </Navbar></>
+                </Navbar>
+                <div><h3 className='text-primary text-left offset-9'>Hi! {this.state.custfname}</h3></div>
+            </>
         )
     }
 }

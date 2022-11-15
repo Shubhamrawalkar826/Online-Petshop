@@ -23,6 +23,9 @@ export default class Customerregistration extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.customerreg = this.customerreg.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
+        this.validateMobileNumber = this.validateMobileNumber.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
     }
 
     validatePassword() {
@@ -31,7 +34,6 @@ export default class Customerregistration extends Component {
 
         if (regexPassword.test(password) === true) {
             document.getElementById("passwordVr").innerHTML = "";
-            return true;
         } else {
             document.getElementById("passwordVr").innerHTML = "password must be alphanumeric and should contains at least a special character with length 5"
         }
@@ -40,11 +42,9 @@ export default class Customerregistration extends Component {
 
     validateEmail() {
         let email = document.getElementById("email").value;
-
         var regexEmail = /\S+@\S+\.\S+/;
         if (regexEmail.test(email) === true) {
             document.getElementById("emailVr").innerHTML = "";
-            return true;
         } else {
             document.getElementById("emailVr").innerHTML = "email format should be 'abc@gmail.com'"
 
@@ -83,12 +83,14 @@ export default class Customerregistration extends Component {
             contactno: this.state.contactno
         };
 
-        if (this.state.email === '') {
-            toast.error("Please enter email", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+        var regexEmail = /\S+@\S+\.\S+/;
+        if (this.state.email === '' || regexEmail.test(this.state.email) !== true) {
+            toast.error("Please enter valid email", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.password === '') {
-            toast.error("Please enter password", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+        var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{5,}$/;;
+        if (this.state.password === '' || regexPassword.test(this.state.password) !== true) {
+            toast.error("Please enter valid password", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
         if (this.state.password !== this.state.confirmPassword) {
@@ -107,14 +109,19 @@ export default class Customerregistration extends Component {
             toast.error("Please enter address", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.contactno === '') {
-            toast.error("Please enter contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+        if (this.state.contactno === '' || this.state.contactno.length !== 10) {
+            toast.error("Please enter valid contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
+        /* if (this.state.contactno.length !== 10) {
+             toast.error("Please enter valid contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+             return false;
+         }*/
 
         CustomerregistrationAPI.custreg(user).then(() => {
             this.setState({
-                message: 'registration successful.',
+                //message: 'registration successful.',
+                message: '',
                 email: '',
                 password: '',
                 confirmPassword: '',
@@ -125,11 +132,11 @@ export default class Customerregistration extends Component {
             });
 
             console.log(user);
-            toast.success(this.state.message);
+            toast.success('registration successful.');
 
         }).catch(error => {
             this.setState({ message: 'Registration failed.' });
-            toast.error(this.state.message, { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
+            toast.error('Registration failed.', { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
             //err.response.data => DTO on the server side : ErrorResponse
             console.log(error);
         });

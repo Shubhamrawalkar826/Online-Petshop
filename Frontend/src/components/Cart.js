@@ -128,7 +128,7 @@ export default class Cart extends Component {
                                     }
                                 </tbody>
                             </table>
-                            <Button className="justify-content-center mt-2" onClick={this.confirmOrder}>Confirm Order</Button>
+                            <Button className="justify-content-center mt-2 mb-4" onClick={this.confirmOrder}>Confirm Order</Button>
                         </div>
                     }
                 </div>

@@ -92,7 +92,6 @@ export default class SearchPet extends Component {
         return (
             <> <div>
                 <CustNavBar />
-                <h3 className='text-light'>Search Pets</h3><br></br>
                 {this.state.typelist.length === 0 ? "" :
                     <Form className='mt-2'>
                         <Form.Label className='text-light'>
@@ -109,7 +108,7 @@ export default class SearchPet extends Component {
                     {this.state.pets.length === 0 ? " " :
                         <div> <h3 className='text-light'>All Registered Pets List</h3>
 
-                            <table className="table text-light table-bordered">
+                            <table className="table table-bordered">
                                 <thead className="bg-dark text-light">
                                     <tr>
                                         <th className="visually-hidden">Id</th>
@@ -122,7 +121,7 @@ export default class SearchPet extends Component {
                                         <th> </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className='bg-light text-dark'>
                                     {
                                         this.state.pets.map(
                                             users =>
@@ -159,7 +158,7 @@ export default class SearchPet extends Component {
                                             <th> </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className='bg-light text-dark'>
                                         {
                                             this.state.petlist.map(
                                                 users =>

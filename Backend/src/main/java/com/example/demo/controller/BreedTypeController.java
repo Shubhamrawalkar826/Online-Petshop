@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entitites.Breedtype;
+import com.example.demo.entitites.BreedtypeReg;
+import com.example.demo.entitites.TypeId;
+import com.example.demo.repository.TypeIdRepository;
 import com.example.demo.service.BreedtypeService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -19,6 +22,9 @@ public class BreedTypeController {
 
 	@Autowired
 	BreedtypeService bserv;
+	
+	@Autowired
+	TypeIdRepository tprepo;
 	
 	@GetMapping("/showdata/{id}")
 	public List<Breedtype> getAll(@PathVariable("id") int typeid)
@@ -30,10 +36,13 @@ public class BreedTypeController {
 	public List<Breedtype> getBreeds(){
 		return bserv.getAll();
 	}
+	
 	@PostMapping("/savebreed")
-	public Breedtype save(@RequestBody Breedtype b)
+	public Breedtype save(@RequestBody BreedtypeReg b)
 	{ 
-		return bserv.addData(b);
+		TypeId tp = tprepo.findByTypeid(b.getTypeid());
+		Breedtype bt = new Breedtype(b.getBreedtypeid(),b.getBreedname(),tp); 
+		return bserv.addData(bt);
 	}
 	
 }

@@ -21,48 +21,49 @@ export default class Login extends Component {
     }
 
     userlogin = e => {
-        if (this.state.email === '') {
+        /*if (this.state.email === '') {
             toast.error("Email cannot be null", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
         if (this.state.password === '') {
             toast.error("Password cannot be null", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
-        }
+        }*/
         e.preventDefault();
+        var regexEmail = /\S+@\S+\.\S+/;
+        if (this.state.email === '' || regexEmail.test(this.state.email) !== true) {
+            toast.error("Please enter valid email", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+            return false;
+        }
+        var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{5,}$/;;
+        if (this.state.password === '' || regexPassword.test(this.state.password) !== true) {
+            toast.error("Please enter valid password", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+            return false;
+        }
 
         LoginAPI.Login(this.state.email, this.state.password)
             .then(response => {
-                //console.log(localStorage.setItem("role", response.data));
-                //console.log(response.data.userFirstName)
 
                 console.log(response.data);
                 this.setState({ message: 'Login successful.' });
-                toast.success(this.state.message);
                 console.log(response.data.loginid.usertype);
                 sessionStorage.setItem("role", response.data.loginid.usertype);
 
                 let role = sessionStorage.getItem("role");
                 console.log(role);
 
-
-
-
-
                 if (response.data.loginid.usertype === "customer") {
                     sessionStorage.setItem("customer", JSON.stringify(response.data));
-                    //this.props.history.push("/customerDashboard");
                     window.location.href = "/customerDashboard";
                 }
                 else {
                     sessionStorage.setItem("admin", JSON.stringify(response.data));
-                    //this.props.history.push("/adminDashboard");
                     window.location.href = "/adminDashboard";
                 }
             })
             .catch(error => {
                 this.setState({ message: 'Invalid email or password' });
-                toast.error(this.state.message, { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
+                toast.error('Invalid email or password', { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
                 //err.response.data => DTO on the server side : ErrorResponse
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const PaymentDashboard = () => {
+const Practice = () => {
 
     const [address, setAddress] = useState('');
 
@@ -33,4 +33,4 @@ const PaymentDashboard = () => {
     )
 }
 
-export default PaymentDashboard
+export default Practice
