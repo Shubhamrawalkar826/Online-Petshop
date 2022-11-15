@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entitites.Breedtype;
+import com.example.demo.entitites.BreedtypeReg;
+import com.example.demo.entitites.TypeId;
 import com.example.demo.repository.BreedTypeRepository;
+import com.example.demo.repository.TypeIdRepository;
 
 @Service
 public class BreedtypeService {
 
 	@Autowired
 	BreedTypeRepository brepo;
+	
 	
 	
 	public List<Breedtype> getAll(int typeid)

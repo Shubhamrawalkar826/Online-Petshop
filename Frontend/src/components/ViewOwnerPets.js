@@ -180,7 +180,7 @@ export default class ViewOwnerPets extends Component {
 
     render() {
         return (
-            <div>
+            <div className='container'>
                 <CustNavBar />
                 {this.state.users.length === 0 ? <h3 className='text-light'>No Pets Sold yet</h3> :
                     <div> <h3 className='text-light'>Your Pets For Sell</h3>
@@ -198,7 +198,7 @@ export default class ViewOwnerPets extends Component {
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className='bg-light text-dark'>
                                 {
                                     this.state.users.map(
                                         users =>
@@ -206,8 +206,8 @@ export default class ViewOwnerPets extends Component {
                                                 <PetDisplay users={users} message={this.state.message} setState={this.setState} state={this.state}
                                                     forceUpdate={this.forceUpdate}>
                                                 </PetDisplay>
-                                                <td><Button onClick={() => { this.handleshow(users.pid) }}>update</Button><Button onClick={() => { this.onDeletePet(users.pid) }}>delete</Button></td>
-                                                <td> </td>
+                                                <td><Button onClick={() => { this.handleshow(users.pid) }}>update</Button><Button className="btn-danger" onClick={() => { this.onDeletePet(users.pid) }}>delete</Button></td>
+
                                             </tr>
                                     )
                                 }

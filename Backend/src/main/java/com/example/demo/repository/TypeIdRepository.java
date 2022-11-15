@@ -8,4 +8,5 @@ import com.example.demo.entitites.TypeId;
 @Repository
 public interface TypeIdRepository extends JpaRepository<TypeId,Integer> {
 
+	public TypeId findByTypeid(int typeid);
 }

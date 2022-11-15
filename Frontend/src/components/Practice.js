@@ -2,24 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const PaymentDashboard = () => {
+const Practice = () => {
 
     const [address, setAddress] = useState('');
 
     useEffect(() => {
         let cust = JSON.parse(sessionStorage.getItem("customer"));
         console.log(cust);
-<<<<<<< HEAD
-        this.setState({
-            address: cust.address,
-        });
-        if (sessionStorage.getItem("role") == null) {
-            window.location.href = "/";
-        }
-    }
-    render() {
-        return (
-=======
         if (sessionStorage.getItem("role") == null) {
             window.location.href = "/";
         }
@@ -32,7 +21,6 @@ const PaymentDashboard = () => {
 
     return (
         <>
->>>>>>> branch1
             <div><br></br>
                 <Nav.Link as={Link} to='/cart'><h6 className='btn btn-secondary offset-9'>Go back</h6></Nav.Link>
                 <h2 className='text-light'>Your order has been placed</h2>
@@ -45,4 +33,4 @@ const PaymentDashboard = () => {
     )
 }
 
-export default PaymentDashboard
+export default Practice

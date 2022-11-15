@@ -46,7 +46,10 @@ export default class Login extends Component {
 
                 console.log(response.data);
                 this.setState({ message: 'Login successful.' });
+<<<<<<< HEAD
                 toast.success('Login successful.');
+=======
+>>>>>>> branch1
                 console.log(response.data.loginid.usertype);
                 sessionStorage.setItem("role", response.data.loginid.usertype);
 

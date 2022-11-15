@@ -12,7 +12,7 @@ export default function NavBarComp() {
     return (
         <div>
             <Navbar bg="dark" expand="lg">
-                <Container> <Navbar.Brand className="text-light" href="#home">Online PetShop</Navbar.Brand>
+                <Container> <Navbar.Brand className="font-weight-bolder text-light" href="#home">Online PetShop</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">

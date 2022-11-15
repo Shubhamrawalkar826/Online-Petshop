@@ -33,12 +33,13 @@ export default class CustProfile extends Component {
             <div>
                 <CustNavBar />
                 <h2 className='text-light mt-5'>CustProfile</h2>
-                <Container className='bg-dark rounded' style={{ minHeight: 250, width: 400 }}>
-                    <h5 className='text-light pt-3 mb-4'>First Name: {this.state.fname}</h5>
-                    <h5 className='text-light mb-4'>Last Name: {this.state.lname}</h5>
-                    <h5 className='text-light mb-4'>Address: {this.state.address}</h5>
-                    <h5 className='text-light mb-4'>Contact Number: {this.state.contactno}</h5>
-                    <h5 className='text-light mb-4'>Email: {this.state.email}</h5>
+                <Container className='bg-dark text-light rounded' style={{ minHeight: 250, width: 400 }}>
+
+                    <h5 className='pt-3 mb-4'>First Name: {this.state.fname}</h5>
+                    <h5 className='mb-4'>Last Name: {this.state.lname}</h5>
+                    <h5 className='mb-4'>Address: {this.state.address}</h5>
+                    <h5 className='mb-4'>Contact Number: {this.state.contactno}</h5>
+                    <h5 className='mb-4'>Email: {this.state.email}</h5>
                 </Container>
             </div>
 

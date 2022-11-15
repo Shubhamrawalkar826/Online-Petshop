@@ -218,7 +218,11 @@ export default class PetRegisteration extends Component {
                             </Form.Label>
                         </Form>
                     }{this.state.breedid === "other" ? <Form><Form.Control name="bredname" type="text" value={this.state.bredname} onChange={this.onChange} placeholder="Enter new breedtype"></Form.Control><Button onClick={() => this.addNewBreed(this.state.pettypeid)}>Add new breed</Button></Form> : ""}</div>
+<<<<<<< HEAD
                     <Form className="container bg-dark pt-2">
+=======
+                    <Form className="container bg-dark pt-2 pb-4">
+>>>>>>> branch1
                         <Form.Group className="mb-4" controlId="formBasicPassword">
                             <Form.Control className="text-center" id="image" name="image" type="file" value={this.state.image} onChange={this.onChange} placeholder="choose image" />
                         </Form.Group>
