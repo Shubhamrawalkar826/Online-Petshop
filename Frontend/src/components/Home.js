@@ -18,13 +18,17 @@ const Home = () => {
             sessionStorage.removeItem('reloadCount');
         }
     }, []);*/
+    const myStyle = {
+        backgroundImage: "url('Homepage.jpg')", backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed',
+        backgroundSize: 'cover'
+    }
 
     let role = (sessionStorage.getItem("role"));
     console.log(role);
 
     return (
         <>
-            <div className="d-flex flex-column justify-content-center align-items-center w-100 h-100 position-fixed" style={{ backgroundColor: 'transparent' }}>
+            <div className="d-flex flex-column justify-content-center align-items-center w-100 h-100 position-fixed" style={myStyle}>
                 <h4 className="font-weight-bolder text-light text-uppercase">Online Pet Shop</h4>
                 <div className="container w-50">
                     <p className="display-6 text-light text-center">Buy or sell pets from this online pet shop</p>
@@ -32,11 +36,11 @@ const Home = () => {
                 {role ?
                     (<span>
                         <h4 className='text-success text-uppercase'>You are already logged in</h4>
-                        <Button className='btn-secondary' onClick={() => window.history.back()}>Go back</Button>
+                        <Button className='btn-secondary btn-lg' onClick={() => window.history.back()}>BACK</Button>
                     </span>) :
                     (<div>
-                        <NavLink className="btn btn-lg btn-light text-uppercase text-decoration-none mx-3" to="/login">Login</NavLink>
-                        <NavLink className="btn btn-lg btn-outline-light text-uppercase text-decoration-none mx-3" to="/customerregistration">Sign Up</NavLink>
+                        <NavLink className="btn btn-lg btn-outline-light text-uppercase text-decoration-none mx-3" to="/login">Login</NavLink>
+                        <NavLink className="btn btn-lg btn-outline-dark text-uppercase text-decoration-none mx-3" to="/customerregistration">Sign Up</NavLink>
                     </div>)
                 }
             </div>

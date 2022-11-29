@@ -9,6 +9,7 @@ export default function NavBarComp() {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     return (
         <div>
             <Navbar bg="dark" expand="lg">
@@ -18,6 +19,7 @@ export default function NavBarComp() {
                         <Nav className="me-auto">
                             <Nav.Link className="text-light" as={Link} to="/home">Home</Nav.Link>
                         </Nav>
+
                         <Button variant="primary" onClick={handleShow}>
                             About us
                         </Button>
@@ -40,7 +42,7 @@ export default function NavBarComp() {
                     <li>Gaurav Patil</li>
                 </Offcanvas.Body>
             </Offcanvas>
-        </div>
+        </div >
 
     )
 

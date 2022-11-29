@@ -30,7 +30,7 @@ export default class CustProfile extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='overflow-hidden'>
                 <CustNavBar />
                 <h2 className='text-light mt-5'>CustProfile</h2>
                 <Container className='bg-dark text-light rounded' style={{ minHeight: 250, width: 400 }}>

@@ -95,23 +95,23 @@ export default class ForgotPassword extends Component {
 
     render() {
         return (
-            <div className="container overflow-hidden mb-5" >
-                <div className="row my-3">
-                    <div className="col-sm-8">
-                        <h2 className="text-light offset-6">Forgot Password</h2>
-                    </div>
-                    <div className="col-sm-4">
-                        <Nav.Link as={Link} to='/login'><h6 className='btn btn-secondary text-uppercase offset-8'>Go Back</h6></Nav.Link>
-                    </div>
-                </div>
-                <form className="container rounded bg-light pt-2" style={{ width: "30vw" }}>
+            <div className="container overflow-hidden mt-5" >
+
+                <form className="container rounded bg-light pt-3" style={{ width: "28rem" }}>
                     <div className="form-group">
-                        <label>Enter Your Email</label>
-                        <input id="email" type="email" className="form-control text-center mt-3" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange} />
+                        <h4>Forgot Password</h4><hr></hr>
+                        <label>Please enter your email to search for your account</label>
+                        <input id="email" type="email" className="form-control text-center mt-3" placeholder="Email Address" name="email" value={this.state.email} onChange={this.onChange} />
                     </div><br></br>
-                    <div className="row my-7">
-                        <div className="col-sm-7">
-                            <button className="btn btn-primary text-uppercase mb-3 offset-8" onClick={this.verifyemail}>Search</button>
+                    <div className=" my-7">
+                        <div className='row justify-content-end'>
+                            <div className='col-sm-1 mx-1'>
+                                <Nav.Link as={Link} to='/login'><h6 className='btn btn-secondary text-uppercase'>cancel</h6></Nav.Link>
+                            </div>
+                            <div className='col-sm-2 mx-5'>
+                                <button className="btn btn-primary text-uppercase mb-3" onClick={this.verifyemail}>Search</button>
+                            </div>
+
                             <ToastContainer />
                         </div>
                     </div>

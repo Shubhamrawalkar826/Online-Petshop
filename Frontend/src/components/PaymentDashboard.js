@@ -17,7 +17,7 @@ const PaymentDashboard = () => {
         return () => {
             console.log("payment done")
         }
-    })
+    }, [])
 
     return (
         <>

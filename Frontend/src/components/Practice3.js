@@ -3,8 +3,9 @@ import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 import CustomerregistrationAPI from '../services/CustomerregistrationAPI';
 import CustNavBar from './CustNavBar';
 import PetDisplay from './PetDisplay';
+import Practice2 from './Practice2';
 
-const SearchPet = () => {
+const Practice3 = () => {
 
     const [petlist, setPetlist] = useState([]);
     const [ptype, setPtype] = useState(undefined);
@@ -82,19 +83,19 @@ const SearchPet = () => {
     }
 
     return (
-        <div className='overflow-hidden'>
-            <CustNavBar />
-            <div className='container'>
-
+        <>
+            <div className='overflow-hidden'>
+                <CustNavBar />
                 {typelist.length === 0 ? "" :
-                    <Row className='justify-content-md-center'><Col md="auto">
-
-                        <Form.Select style={{ width: "15rem" }} value={ptype} onChange={handleChange}>
-                            <option selected disabled>Search Pet Type</option>
-                            {typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
-                        </Form.Select>
-                    </Col></Row>
-
+                    <Form className='mt-2'>
+                        <Form.Label className='text-light'>
+                            Select type of pet:
+                            <Form.Select value={ptype} onChange={handleChange}>
+                                <option selected disabled>select pet type</option>
+                                {typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
+                            </Form.Select>
+                        </Form.Label>
+                    </Form>
                 }
             </div>
             <div className="mx-4 my-4">
@@ -108,8 +109,8 @@ const SearchPet = () => {
                                         <Card className="mx-2 my-3 py-2" style={{ width: '18rem' }}>
                                             <Col key={users.pid}>
 
-                                                <PetDisplay users={users}>
-                                                </PetDisplay>
+                                                <Practice2 users={users}>
+                                                </Practice2>
                                                 <div className='my-2'>
 
                                                     <Button className='px-4' onClick={() => { onAddtocart(users) }}>add to cart</Button>
@@ -134,8 +135,8 @@ const SearchPet = () => {
                                             <Card className="mx-2 my-3 py-2" style={{ width: '18rem' }}>
                                                 <Col key={users.pid}>
 
-                                                    <PetDisplay users={users}>
-                                                    </PetDisplay>
+                                                    <Practice2 users={users}>
+                                                    </Practice2>
                                                     <div className='my-2'>
                                                         <Button className='px-4' onClick={() => { onAddtocart(users) }}>add to cart</Button>
                                                     </div>
@@ -148,8 +149,8 @@ const SearchPet = () => {
                         </div>
                     }
                 </div> : ''}
-        </div>
+        </>
     )
 }
 
-export default SearchPet
+export default Practice3

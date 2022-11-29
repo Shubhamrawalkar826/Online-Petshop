@@ -20,7 +20,6 @@ import PetRegisteration from './components/PetRegisteration';
 import PaymentDashboard from './components/PaymentDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import Footer from './components/Footer';
-import Practice from './components/Practice';
 
 function App() {
   return (
@@ -43,7 +42,6 @@ function App() {
         <Route exact path="/petregistration" element={<PetRegisteration />} />
         <Route exact path="/paymentDashboard" element={<PaymentDashboard />} />
         <Route exact path="/forgotPassword" element={<ForgotPassword />} />
-        <Route exact path="/practice" element={<Practice />} />
 
       </Routes>
 

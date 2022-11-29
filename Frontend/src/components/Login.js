@@ -21,14 +21,6 @@ export default class Login extends Component {
     }
 
     userlogin = e => {
-        /*if (this.state.email === '') {
-            toast.error("Email cannot be null", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
-            return false;
-        }
-        if (this.state.password === '') {
-            toast.error("Password cannot be null", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
-            return false;
-        }*/
         e.preventDefault();
         var regexEmail = /\S+@\S+\.\S+/;
         if (this.state.email === '' || regexEmail.test(this.state.email) !== true) {
@@ -65,8 +57,6 @@ export default class Login extends Component {
                 this.setState({ message: 'Invalid email or password' });
                 toast.error('Invalid email or password', { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
                 //err.response.data => DTO on the server side : ErrorResponse
-
-
                 console.log(error);
             });
 
@@ -78,32 +68,32 @@ export default class Login extends Component {
             <div className="container overflow-hidden mb-5" >
                 <div className="row my-3">
                     <div className="col-sm-8">
-                        <h2 className="text-light offset-6">User Login</h2>
                     </div>
                     <div className="col-sm-4">
                         <Nav.Link as={Link} to='/home'><h6 className='btn btn-secondary text-uppercase offset-8'>Go Back</h6></Nav.Link>
                     </div>
                 </div>
-                <form className="container rounded bg-light pt-2" style={{ width: "30vw" }}>
+                <form className="container rounded bg-light pt-2" style={{ width: "25rem" }}>
+                    <h4 className="mt-1">Login</h4>
                     <div className="form-group">
                         <input id="email" type="email" className="form-control text-center mt-3" placeholder="Email" name="email" value={this.state.email} onChange={this.onChange} />
                     </div>
                     <div className="form-group my-3">
                         <input type="password" className="form-control text-center" name="password" placeholder="Password" value={this.state.password} onChange={this.onChange} />
                     </div>
-                    <div className="row my-3">
-                        <div className="col-sm-7">
-                            <button className="btn btn-success text-uppercase mb-1 offset-8" onClick={this.userlogin} >LOGIN</button>
+                    <div>
+                        <div>
+                            <button className="btn btn-primary px-5 text-uppercase mb-1" onClick={this.userlogin} >LOGIN</button>
                             <ToastContainer />
                         </div>
                         <h5>{this.state.message}</h5>
                     </div>
                     <div>
-                        <Nav.Link as={Link} to='/forgotPassword'><h6 className='btn btn-link mb-2 '>Forgot Password</h6></Nav.Link>
-                    </div>
+                        <Nav.Link as={Link} to='/forgotPassword'><h6 className='btn text-decoration-none btn-link mb-2 '>Forgot Password?</h6></Nav.Link>
+                    </div><hr></hr>
                     <div>
-                        <p>No..Account? Create Here:</p>
-                        <Nav.Link as={Link} to='/customerregistration'><h6 className='btn btn-primary mb-4'>Sign Up</h6></Nav.Link>
+
+                        <Nav.Link as={Link} to='/customerregistration'><h6 className='btn btn-success mb-4'>Create New Account</h6></Nav.Link>
                     </div>
                 </form>
                 <span id="span"></span>

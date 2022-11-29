@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import { Button, Container, Form } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import CustomerregistrationAPI from '../services/CustomerregistrationAPI';
-import PetownerregistrationAPI from '../services/PetownerregistrationAPI';
 import CustNavBar from './CustNavBar'
 
 export default class PetRegisteration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // value: '1',
-            //selectbreed: '',
             bredname: '',
             typelist: [],
             breedlist: [],
@@ -25,11 +22,6 @@ export default class PetRegisteration extends Component {
         this.reloadpettypelist = this.reloadpettypelist.bind(this);
         this.breedtypelist = this.breedtypelist.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleChange1 = this.handleChange1.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
-        //  this.handleSubmit1 = this.handleSubmit1.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.ownerreg = this.ownerreg.bind(this);
         this.addNewBreed = this.addNewBreed.bind(this);
     }
 
@@ -40,31 +32,10 @@ export default class PetRegisteration extends Component {
         this.breedtypelist(event.target.value);
     }
 
-    handleChange1(event) {
-        this.setState({
-            breedid: event.target.value
-        });
-    }
-
-    /*handleSubmit(event) {
-        alert('Your favorite flavor is: ' + this.state.value);
-        event.preventDefault();
-        this.setState({
-            pettypeid: this.state.value
-        })
-        this.breedtypelist(this.state.value);
-    }*/
-
-    /* handleSubmit1(event) {
-         alert('Your favorite flavor is: ' + this.state.selectbreed);
-         event.preventDefault();
-         console.log(this.state.selectbreed);
-         this.setState({
-             breedid: this.state.selectbreed
-         })
-     }*/
-
     componentDidMount() {
+        if (sessionStorage.getItem("role") == null) {
+            window.location = "/"
+        }
         let cust = JSON.parse(sessionStorage.getItem("customer"));
         this.setState({
             custid: cust.cid
@@ -72,10 +43,6 @@ export default class PetRegisteration extends Component {
         this.reloadpettypelist();
 
     }
-
-    /* if (sessionStorage.getItem("role") == null) {
-       window.location = "/"
-   }*/
 
     reloadpettypelist() {
         CustomerregistrationAPI.fetchAllpettype().then((resp) => {
@@ -108,18 +75,6 @@ export default class PetRegisteration extends Component {
         formData.append("age", this.state.age)
         formData.append("price", this.state.price)
 
-        /* let user = {
-             breedtypeid: this.state.breedid,
-             typeid: this.state.pettypeid,
-             cid: this.state.custid,
-             image: this.state.image,
-             age: this.state.age,
-             price: this.state.price
-         };
- 
-         var imagefile = new FormData();
-          imagefile.append('image', document.getElementById("image").files[0]);*/
-
         if (this.state.age === '') {
             toast.error("Please enter age", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
@@ -134,7 +89,6 @@ export default class PetRegisteration extends Component {
                 method: "POST", body: formData
             })
             .then((res) => {
-                //console.log(res);
                 return res.json();
             }).then((res) => {
                 this.setState({
@@ -149,21 +103,7 @@ export default class PetRegisteration extends Component {
                 toast.success('registration successful.');
             });
 
-        /*  PetownerregistrationAPI.petreg(user).then(() => {
-              this.setState({
-                  message: 'registration successful.',
-                  age: '',
-                  price: ''
-              });
-              console.log(user);
-  
-              toast.success(this.state.message);
-          }).catch(error => {
-              this.setState({ message: 'Registration failed.' });
-              toast.error(this.state.message, { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
-              //err.response.data => DTO on the server side : ErrorResponse
-              console.log(error);
-          });*/
+
     }
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
@@ -184,41 +124,40 @@ export default class PetRegisteration extends Component {
                 breedid: res.data.breedtypeid
             })
             console.log(res.data.breedtypeid);
-        }).catch(() => {
-            toast.error("registration failed", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
+        }).catch((error) => {
+            console.log(error.response.data);
+            toast.error(error.response.data, { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
         })
     }
 
     render() {
         return (
-            <div>
+            <div className='overflow-hidden'>
                 <CustNavBar />
-                <h2 className="text-light">Pet Registration</h2>
-                <Container className='rounded bg-dark pt-2' style={{ width: "30vw" }}><div>
-                    {this.state.typelist.length === 0 ? <h4>Nothing in database</h4> :
-                        <Form >
-                            <Form.Label className='text-light'>
-                                Select type of pet:
-                                <Form.Select value={this.state.pettypeid} onChange={this.handleChange}>
-                                    <option selected disabled>---select---</option>
-                                    {this.state.typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
-                                </Form.Select>
-                            </Form.Label>
+                <Container className='rounded bg-light pt-2' style={{ width: "30vw" }}><div>
+                    <h4 className="mt-2">Pet Registration</h4>
+                    {this.state.typelist.length === 0 ? <h4 className='text-light'>Nothing in database</h4> :
+                        <Form>
+
+                            <Form.Select value={this.state.pettypeid} onChange={this.handleChange}>
+                                <option selected disabled>Select Pet Type</option>
+                                {this.state.typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
+                            </Form.Select>
+
                         </Form>
                     }
-                    {this.state.breedlist.length === 0 ? <h6>No pets in database</h6> :
-                        <Form >
-                            <Form.Label className='text-light'>
-                                Select type of breed:
-                                <Form.Select value={this.state.breedid} onChange={this.handleChange1}>
-                                    <option selected disabled>---select---</option>
-                                    <option>other</option>
-                                    {this.state.breedlist.map((breedlist) => (<option key={breedlist.breedtypeid} value={breedlist.breedtypeid}>{breedlist.breedname}</option>))}
-                                </Form.Select>
-                            </Form.Label>
+                    {this.state.breedlist.length === 0 ? <h6 className='text-light'>No pets in database</h6> :
+                        <Form className='mt-4'>
+
+                            <Form.Select name="breedid" value={this.state.breedid} onChange={this.onChange}>
+                                <option selected disabled>Select Breed Type</option>
+                                <option>other</option>
+                                {this.state.breedlist.map((breedlist) => (<option key={breedlist.breedtypeid} value={breedlist.breedtypeid}>{breedlist.breedname}</option>))}
+                            </Form.Select>
+
                         </Form>
-                    }{this.state.breedid === "other" ? <Form><Form.Control name="bredname" type="text" value={this.state.bredname} onChange={this.onChange} placeholder="Enter new breedtype"></Form.Control><Button onClick={() => this.addNewBreed(this.state.pettypeid)}>Add new breed</Button></Form> : ""}</div>
-                    <Form className="container bg-dark pt-2 pb-4">
+                    }{this.state.breedid === "other" ? <Form><Form.Control className='my-2' name="bredname" type="text" value={this.state.bredname} onChange={this.onChange} placeholder="Enter new breedtype"></Form.Control><Button onClick={() => this.addNewBreed(this.state.pettypeid)}>Add new breed</Button></Form> : ""}</div>
+                    <Form className="container bg-light my-4">
                         <Form.Group className="mb-4" controlId="formBasicPassword">
                             <Form.Control className="text-center" id="image" name="image" type="file" value={this.state.image} onChange={this.onChange} placeholder="choose image" />
                         </Form.Group>

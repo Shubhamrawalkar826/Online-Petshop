@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Nav } from 'react-bootstrap'
 import {
     Link
@@ -6,29 +6,28 @@ import {
 import { ToastContainer, toast } from 'react-toastify'
 import CustomerregistrationAPI from "../services/CustomerregistrationAPI";
 
-export default class Customerregistration extends Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-            email: '',
-            password: '',
-            confirmPassword: '',
-            fname: '',
-            lname: '',
-            address: '',
-            contactno: '',
-            message: null
-        }
+const Customerregistration = () => {
 
-        this.onChange = this.onChange.bind(this);
-        this.customerreg = this.customerreg.bind(this);
-        this.validateEmail = this.validateEmail.bind(this);
-        this.validateMobileNumber = this.validateMobileNumber.bind(this);
-        this.validatePassword = this.validatePassword.bind(this);
-    }
+    const [userdetails, setUserdetails] = useState({
+        email: '',
+        confirmPassword: '',
+        password: '',
+        fname: '',
+        lname: '',
+        address: '',
+        contactno: ''
+    });
+    const [message, setMessage] = useState('');
 
-    validatePassword() {
+    const onChange = event => {
+        setUserdetails({
+            ...userdetails,
+            [event.target.name]: event.target.value
+        });
+    };
+
+    const validatePassword = () => {
         let password = document.getElementById("pwd").value;
         var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{5,}$/;;
 
@@ -40,7 +39,7 @@ export default class Customerregistration extends Component {
 
     }
 
-    validateEmail() {
+    const validateEmail = () => {
         let email = document.getElementById("email").value;
         var regexEmail = /\S+@\S+\.\S+/;
         if (regexEmail.test(email) === true) {
@@ -51,14 +50,14 @@ export default class Customerregistration extends Component {
         }
 
     }
-    removeWarnings() {
+    const removeWarnings = () => {
         document.getElementById("passwordVr").innerHTML = "";
         document.getElementById("emailVr").innerHTML = "";
         document.getElementById("mobileNumberVr").innerHTML = "";
 
     }
 
-    validateMobileNumber() {
+    const validateMobileNumber = () => {
         let number = document.getElementById('mobileNumber').value;
         if (/^\d{10}$/.test(number)) {
             document.getElementById("mobileNumberVr").innerHTML = "";
@@ -70,58 +69,58 @@ export default class Customerregistration extends Component {
         }
     }
 
-
-    customerreg = e => {
+    const customerreg = e => {
 
         e.preventDefault();
         let user = {
-            email: this.state.email,
-            password: this.state.password,
-            fname: this.state.fname,
-            lname: this.state.lname,
-            address: this.state.address,
-            contactno: this.state.contactno
+            email: userdetails.email,
+            password: userdetails.password,
+            fname: userdetails.fname,
+            lname: userdetails.lname,
+            address: userdetails.address,
+            contactno: userdetails.contactno
         };
 
         var regexEmail = /\S+@\S+\.\S+/;
-        if (this.state.email === '' || regexEmail.test(this.state.email) !== true) {
+        if (userdetails.email === '' || regexEmail.test(userdetails.email) !== true) {
             toast.error("Please enter valid email", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
         var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{5,}$/;;
-        if (this.state.password === '' || regexPassword.test(this.state.password) !== true) {
+        if (userdetails.password === '' || regexPassword.test(userdetails.password) !== true) {
             toast.error("Please enter valid password", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.password !== this.state.confirmPassword) {
+        if (userdetails.password !== userdetails.confirmPassword) {
             toast.error("Password mismatch", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.fname === '') {
+        if (userdetails.fname === '') {
             toast.error("Please enter first name", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.lname === '') {
+        if (userdetails.lname === '') {
             toast.error("Please enter last name", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.address === '') {
+        if (userdetails.address === '') {
             toast.error("Please enter address", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        if (this.state.contactno === '' || this.state.contactno.length !== 10) {
+        if (userdetails.contactno === '' || userdetails.contactno.length !== 10) {
             toast.error("Please enter valid contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
             return false;
         }
-        /* if (this.state.contactno.length !== 10) {
-             toast.error("Please enter valid contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
-             return false;
-         }*/
+        // if (this.state.contactno.length !== 10) {
+        //     toast.error("Please enter valid contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+        //     return false;
+        // }
 
         CustomerregistrationAPI.custreg(user).then(() => {
-            this.setState({
+            setUserdetails({
+                ...userdetails,
                 //message: 'registration successful.',
-                message: '',
+
                 email: '',
                 password: '',
                 confirmPassword: '',
@@ -130,86 +129,85 @@ export default class Customerregistration extends Component {
                 address: '',
                 contactno: ''
             });
-
+            setMessage('Registration successful.');
             console.log(user);
-            toast.success('registration successful.');
+            toast.success('Registration successful.');
 
         }).catch(error => {
-            this.setState({ message: 'Registration failed.' });
+            setMessage('Registration failed.');
             toast.error('Registration failed.', { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
             //err.response.data => DTO on the server side : ErrorResponse
             console.log(error);
         });
     }
 
-    onChange = e => this.setState({ [e.target.name]: e.target.value });
-    render() {
-        return (
-            <div>
-                <div className="container overflow-hidden mb-5" style={{ minHeight: "100vh" }}>
-                    <div className="row my-3">
-                        <div className="col-sm-8">
-                            <h2 className="text-light offset-8">User Registration</h2>
+    return (
+        <div>
+            <div className="container overflow-hidden mb-2" style={{ minHeight: "100vh" }}>
+                <div className="row mt-3">
+                    <div className="col-sm-8">
+                    </div>
+                    <div className="col-sm-4">
+                        <Nav.Link as={Link} to='/home'><h6 className='btn btn-secondary text-uppercase offset-8'>Go Back</h6></Nav.Link>
+                    </div>
+                </div>
+                <form className="container rounded bg-light py-2 mb-5" style={{ width: "80vh" }}>
+                    <h4 className="mt-2">Sign Up</h4>
+
+                    <div className="form-group pt-2">
+                        <div>
+                            <input type="email" id="email" className="form-control" placeholder="Enter Email Address" name="email" value={userdetails.email} onChange={onChange} onFocus={removeWarnings} onBlur={validateEmail} /><span style={{ color: 'red' }} id='emailVr'></span>
                         </div>
                     </div>
-                    <form className="mb-5">
-                        <div className="form-group row my-2 justify-content-center">
-                            <label htmlFor="email" className="col-2 text-light col-form-label">Email</label>
-                            <div className="col-5">
-                                <input type="email" id="email" className="form-control" placeholder="e.g. abc@xyz.com" name="email" value={this.state.email} onChange={this.onChange} onFocus={this.removeWarnings} onBlur={this.validateEmail} /><span style={{ color: 'red' }} id='emailVr'></span>
-                            </div>
+                    <div className="form-group row pt-2">
+                        <div className="col">
+                            <input type="text" id="firstName" className="form-control" placeholder="Enter your first name" name="fname" value={userdetails.fname} onChange={onChange} required />
                         </div>
-                        <div className="form-group row my-2 justify-content-center">
-                            <label htmlFor="pwd" className="col-2 text-light col-form-label">Password</label>
-                            <div className="col-5">
-                                <input type="password" id="pwd" className="form-control" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange} onBlur={this.validatePassword} onFocus={this.removeWarnings} /><span style={{ color: 'red' }} id='passwordVr'></span>
+                        <div className="col">
+                            <input type="text" id="lastName" className="form-control" placeholder="Enter your last name" name="lname" value={userdetails.lname} onChange={onChange} required />
+                        </div>
+                    </div>
+                    <div className="form-group pt-2">
 
-                            </div>
-                        </div>
-                        <div className="form-group row my-2 justify-content-center">
-                            <label htmlFor="password" className="col-2 text-light col-form-label">Confirm Password</label>
-                            <div className="col-5">
-                                <input type="password" className="form-control" placeholder="Confirm Password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.onChange} required />
+                    </div>
 
-                            </div>
+                    <div className="form-group pt-2">
+                        <div>
+                            <input type="number" id="mobileNumber" className="form-control" placeholder="Enter your contact number" name="contactno" value={userdetails.contactno} onChange={onChange} pattern="[0-9]{10}" onBlur={validateMobileNumber} onFocus={removeWarnings} required /><span id='mobileNumberVr' style={{ color: 'red' }}></span>
                         </div>
-                        <div className="form-group row my-2 justify-content-center">
-                            <label htmlFor="firstName" className="col-2 text-light col-form-label">First Name</label>
-                            <div className="col-5">
-                                <input type="text" id="firstName" className="form-control" placeholder="Enter your first name" name="fname" value={this.state.fname} onChange={this.onChange} required />
-                            </div>
+                    </div>
+                    <div className="form-group pt-2">
+                        <div>
+                            <input type="text" className="form-control" placeholder="Enter your address " name="address" value={userdetails.address} onChange={onChange} required />
                         </div>
-                        <div className="form-group row my-2 justify-content-center">
-                            <label htmlFor="lastName" className="col-2 text-light col-form-label">Last Name</label>
-                            <div className="col-5">
-                                <input type="text" id="lastName" className="form-control" placeholder="Enter your last name" name="lname" value={this.state.lname} onChange={this.onChange} required />
-                            </div>
+                    </div>
+                    <div className="form-group pt-2">
+                        <div>
+                            <input type="password" id="pwd" className="form-control" placeholder="Enter Password" name="password" value={userdetails.password} onChange={onChange} onBlur={validatePassword} onFocus={removeWarnings} /><span style={{ color: 'red' }} id='passwordVr'></span>
+
                         </div>
-                        <div className="form-group row mt-2 justify-content-center">
-                            <label htmlFor="address" className="col-2 text-light col-form-label">Address</label>
-                            <div className="col-5">
-                                <input type="text" className="form-control" placeholder="Enter your address " name="address" value={this.state.address} onChange={this.onChange} required />
-                            </div>
+                    </div>
+                    <div className="form-group pt-2">
+                        <div>
+                            <input type="password" className="form-control" placeholder="Confirm Password" name="confirmPassword" value={userdetails.confirmPassword} onChange={onChange} required />
+
                         </div>
-                        <div className="form-group row my-2 justify-content-center">
-                            <label htmlFor="contactNumber" className="col-2 text-light col-form-label">Contact Number</label>
-                            <div className="col-5">
-                                <input type="number" id="mobileNumber" className="form-control" placeholder="Enter your contact number" name="contactno" value={this.state.contactno} onChange={this.onChange} pattern="[0-9]{10}" onBlur={this.validateMobileNumber} onFocus={this.removeWarnings} required /><span id='mobileNumberVr' style={{ color: 'red' }}></span>
-                            </div>
+                    </div>
+                    <div className="form-group py-2">
+                        <h4 className="display-flex">{message}</h4>
+                        <div >
+                            <button className="btn btn-lg btn-success text-uppercase mt-3" onClick={customerreg}>Sign Up</button>
                         </div>
-                        <div className="form-group row justify-content-center">
-                            <h4 className="text-light display-flex">{this.state.message}</h4>
-                            <div className="offset-9" >
-                                <button className="btn btn-lg btn-primary text-uppercase mt-3" onClick={this.customerreg}>Register</button>
-                            </div>
-                            <div>
-                                <Nav.Link as={Link} to='/login'><h6 className='btn btn-success text-uppercase'>Click to Login</h6></Nav.Link>
-                            </div>
-                        </div>
-                        <ToastContainer />
-                    </form>
-                </div>
+
+                    </div>
+                    <ToastContainer />
+                </form>
             </div>
-        );
-    }
+        </div>
+    )
 }
+
+export default Customerregistration
+
+
+
