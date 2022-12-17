@@ -84,11 +84,13 @@ const Customerregistration = () => {
         var regexEmail = /\S+@\S+\.\S+/;
         if (userdetails.email === '' || regexEmail.test(userdetails.email) !== true) {
             toast.error("Please enter valid email", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+            document.getElementById("emailVr").innerHTML = "email format should be 'abc@gmail.com'"
             return false;
         }
         var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{5,}$/;;
         if (userdetails.password === '' || regexPassword.test(userdetails.password) !== true) {
             toast.error("Please enter valid password", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+            document.getElementById("passwordVr").innerHTML = "password must be alphanumeric and should contains at least a special character with length 5";
             return false;
         }
         if (userdetails.password !== userdetails.confirmPassword) {
@@ -109,6 +111,7 @@ const Customerregistration = () => {
         }
         if (userdetails.contactno === '' || userdetails.contactno.length !== 10) {
             toast.error("Please enter valid contact number", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
+            document.getElementById("mobileNumberVr").innerHTML = "Phone number must be 10 digits.";
             return false;
         }
         // if (this.state.contactno.length !== 10) {
@@ -152,7 +155,7 @@ const Customerregistration = () => {
                     </div>
                 </div>
                 <form className="container rounded bg-light py-2 mb-5" style={{ width: "80vh" }}>
-                    <h4 className="mt-2">Sign Up</h4>
+                    <h4 className="mt-2 text-uppercase">Sign Up</h4>
 
                     <div className="form-group pt-2">
                         <div>

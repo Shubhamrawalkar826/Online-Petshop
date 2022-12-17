@@ -87,10 +87,10 @@ const SearchPet = () => {
             <div className='container'>
 
                 {typelist.length === 0 ? "" :
-                    <Row className='justify-content-md-center'><Col md="auto">
+                    <Row className='justify-content-md-end'><Col md="auto">
 
                         <Form.Select style={{ width: "15rem" }} value={ptype} onChange={handleChange}>
-                            <option selected disabled>Search Pet Type</option>
+                            <option selected disabled>Select Pet Type</option>
                             {typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
                         </Form.Select>
                     </Col></Row>

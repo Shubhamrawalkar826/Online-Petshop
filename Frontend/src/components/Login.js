@@ -74,7 +74,7 @@ export default class Login extends Component {
                     </div>
                 </div>
                 <form className="container rounded bg-light pt-2" style={{ width: "25rem" }}>
-                    <h4 className="mt-1">Login</h4>
+                    <h4 className="mt-2 text-uppercase">Login</h4>
                     <div className="form-group">
                         <input id="email" type="email" className="form-control text-center mt-3" placeholder="Email" name="email" value={this.state.email} onChange={this.onChange} />
                     </div>
@@ -97,7 +97,6 @@ export default class Login extends Component {
                     </div>
                 </form>
                 <span id="span"></span>
-
             </div>
 
 

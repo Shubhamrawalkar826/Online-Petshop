@@ -13,4 +13,6 @@ public interface BreedTypeRepository extends JpaRepository<Breedtype,Integer> {
 
 	@Query(value="select * from breedtype where typeid = ?1" ,nativeQuery = true)
 	public List<Breedtype> getById(int typeid);
+	
+	public Breedtype findByBreedname(String breedname);
 }

@@ -135,7 +135,7 @@ export default class PetRegisteration extends Component {
             <div className='overflow-hidden'>
                 <CustNavBar />
                 <Container className='rounded bg-light pt-2' style={{ width: "30vw" }}><div>
-                    <h4 className="mt-2">Pet Registration</h4>
+                    <h4 className="my-2">Pet Registration</h4>
                     {this.state.typelist.length === 0 ? <h4 className='text-light'>Nothing in database</h4> :
                         <Form>
 
@@ -167,7 +167,7 @@ export default class PetRegisteration extends Component {
                         <Form.Group className="mb-4" controlId="formBasicPassword">
                             <Form.Control className="text-center" name="price" type="number" value={this.state.price} onChange={this.onChange} placeholder="Price" />
                         </Form.Group>
-                        <h5 className="text-light">{this.state.message}</h5>
+                        <h5>{this.state.message}</h5>
                         <Button className="mb-4" onClick={this.ownerreg} variant="primary" >
                             Register
                         </Button>

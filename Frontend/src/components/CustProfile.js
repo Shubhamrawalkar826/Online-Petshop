@@ -32,14 +32,14 @@ export default class CustProfile extends Component {
         return (
             <div className='overflow-hidden'>
                 <CustNavBar />
-                <h2 className='text-light mt-5'>CustProfile</h2>
-                <Container className='bg-dark text-light rounded' style={{ minHeight: 250, width: 400 }}>
 
-                    <h5 className='pt-3 mb-4'>First Name: {this.state.fname}</h5>
-                    <h5 className='mb-4'>Last Name: {this.state.lname}</h5>
-                    <h5 className='mb-4'>Address: {this.state.address}</h5>
-                    <h5 className='mb-4'>Contact Number: {this.state.contactno}</h5>
-                    <h5 className='mb-4'>Email: {this.state.email}</h5>
+                <Container className='bg-light rounded' style={{ minHeight: 270, width: 400 }}>
+                    <h4 className='pt-2 mt-2'>CustProfile</h4><hr></hr>
+                    <h5 className='mb-3'>First Name: {this.state.fname}</h5>
+                    <h5 className='mb-3'>Last Name: {this.state.lname}</h5>
+                    <h5 className='mb-3'>Address: {this.state.address}</h5>
+                    <h5 className='mb-3'>Contact Number: {this.state.contactno}</h5>
+                    <h5 className='mb-3'>Email: {this.state.email}</h5>
                 </Container>
             </div>
 

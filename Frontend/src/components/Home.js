@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -18,17 +18,17 @@ const Home = () => {
             sessionStorage.removeItem('reloadCount');
         }
     }, []);*/
-    const myStyle = {
+    /*const myStyle = {
         backgroundImage: "url('Homepage.jpg')", backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed',
         backgroundSize: 'cover'
-    }
+    }*/
 
     let role = (sessionStorage.getItem("role"));
     console.log(role);
 
     return (
         <>
-            <div className="d-flex flex-column justify-content-center align-items-center w-100 h-100 position-fixed" style={myStyle}>
+            <div className="d-flex flex-column justify-content-center w-100 h-100 position-fixed">
                 <h4 className="font-weight-bolder text-light text-uppercase">Online Pet Shop</h4>
                 <div className="container w-50">
                     <p className="display-6 text-light text-center">Buy or sell pets from this online pet shop</p>
@@ -40,10 +40,11 @@ const Home = () => {
                     </span>) :
                     (<div>
                         <NavLink className="btn btn-lg btn-outline-light text-uppercase text-decoration-none mx-3" to="/login">Login</NavLink>
-                        <NavLink className="btn btn-lg btn-outline-dark text-uppercase text-decoration-none mx-3" to="/customerregistration">Sign Up</NavLink>
+                        <NavLink className="btn btn-lg btn-dark text-uppercase text-decoration-none mx-3" to="/customerregistration">Sign Up</NavLink>
                     </div>)
                 }
             </div>
+
         </>
     )
 }

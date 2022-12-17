@@ -80,7 +80,7 @@ function ViewOwnerPets() {
         <>
             <div className="pb-4 overflow-hidden" >
                 <CustNavBar />
-                {users.length === 0 ? <h3 className='text-light'>No Pets Sold yet</h3> :
+                {users.length === 0 ? <h4 className='text-light'>No Pets Sold yet</h4> :
                     <div> <h3 className='text-light'>Your Pets For Sell</h3>
                         <div className='mx-4'>
                             <Row>

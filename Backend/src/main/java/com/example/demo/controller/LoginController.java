@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entitites.LoginUser;
 import com.example.demo.service.LoginService;
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:3100")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class LoginController {
 
