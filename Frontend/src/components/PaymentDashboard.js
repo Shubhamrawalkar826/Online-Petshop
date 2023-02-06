@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import BackButton from './BackButton';
 
 const PaymentDashboard = () => {
 
@@ -22,7 +23,7 @@ const PaymentDashboard = () => {
     return (
         <>
             <div><br></br>
-                <Nav.Link as={Link} to='/cart'><h6 className='btn btn-secondary offset-9'>Go back</h6></Nav.Link>
+                <BackButton />
                 <h2 className='text-light'>Your order has been placed</h2>
                 <h4 className='text-light'>Payment method : Cash On Delivery</h4>
                 <h4 className='text-light'>Address for delivery is : {address} </h4>

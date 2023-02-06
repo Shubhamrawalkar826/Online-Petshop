@@ -20,6 +20,7 @@ function Allregisteredusers() {
         CustomerregistrationAPI.fetchAllCustomers()
             .then((resp) => {
                 setUsers(resp.data);
+                setUsers(users.filter(users => users.usertype !== "admin"));
                 setMessage("Users list rendered successfully");
                 console.log(message);
             });
@@ -59,7 +60,7 @@ function Allregisteredusers() {
                     <Nav.Link as={Link} onClick={logout} className="btn btn-danger text-light offset-10 text-uppercase text-decoration-none " to="/home">Logout</Nav.Link>
                 </Nav>
                 {users.length === 0 ? <h3>No users in database</h3> :
-                    <div> <h3 className='text-light'>All Registered Users List</h3>
+                    <div className='mt-4'>
 
                         <table className="table text-light table-bordered">
                             <thead className="bg-dark text-light">

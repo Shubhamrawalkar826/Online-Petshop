@@ -82,7 +82,7 @@ const SearchPet = () => {
     }
 
     return (
-        <div className='overflow-hidden'>
+        <div>
             <CustNavBar />
             <div className='container'>
 
@@ -90,14 +90,14 @@ const SearchPet = () => {
                     <Row className='justify-content-md-end'><Col md="auto">
 
                         <Form.Select style={{ width: "15rem" }} value={ptype} onChange={handleChange}>
-                            <option selected disabled>Select Pet Type</option>
+                            <option className='text-center' selected disabled>Search for pet</option>
                             {typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
                         </Form.Select>
                     </Col></Row>
 
                 }
             </div>
-            <div className="mx-4 my-4">
+            <div className="container my-4">
                 {pets.length === 0 ? " " :
                     <div>
 
@@ -105,7 +105,7 @@ const SearchPet = () => {
                             {
                                 pets.map(
                                     users =>
-                                        <Card className="mx-2 my-3 py-2" style={{ width: '18rem' }}>
+                                        <Card className="mx-2 my-3 py-2" style={{ width: '16rem' }}>
                                             <Col key={users.pid}>
 
                                                 <PetDisplay users={users}>
@@ -123,7 +123,7 @@ const SearchPet = () => {
                     </div>
                 }
             </div>{flag ?
-                <div className="mx-4 my-4">
+                <div className="container my-4">
                     {petlist.length === 0 ? <h4>No Pets in Store</h4> :
                         <div>
 
@@ -131,7 +131,7 @@ const SearchPet = () => {
                                 {
                                     petlist.map(
                                         users =>
-                                            <Card className="mx-2 my-3 py-2" style={{ width: '18rem' }}>
+                                            <Card className="mx-2 my-3 py-2" style={{ width: '16rem' }}>
                                                 <Col key={users.pid}>
 
                                                     <PetDisplay users={users}>

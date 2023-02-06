@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
 import CustomerregistrationAPI from "../services/CustomerregistrationAPI";
+import BackButton from "./BackButton";
 
 
 const Customerregistration = () => {
@@ -151,28 +152,27 @@ const Customerregistration = () => {
                     <div className="col-sm-8">
                     </div>
                     <div className="col-sm-4">
-                        <Nav.Link as={Link} to='/home'><h6 className='btn btn-secondary text-uppercase offset-8'>Go Back</h6></Nav.Link>
+                        <BackButton />
                     </div>
                 </div>
-                <form className="container rounded bg-light py-2 mb-5" style={{ width: "80vh" }}>
-                    <h4 className="mt-2 text-uppercase">Sign Up</h4>
-
-                    <div className="form-group pt-2">
+                <form className="container rounded bg-light px-3 py-2 mb-5" style={{ width: "80vh" }}>
+                    <h3 className="mt-2 ">Sign Up</h3><hr></hr>
+                    <div className="form-group">
                         <div>
                             <input type="email" id="email" className="form-control" placeholder="Enter Email Address" name="email" value={userdetails.email} onChange={onChange} onFocus={removeWarnings} onBlur={validateEmail} /><span style={{ color: 'red' }} id='emailVr'></span>
                         </div>
                     </div>
-                    <div className="form-group row pt-2">
+                    <div className="form-group  pt-2 row">
                         <div className="col">
                             <input type="text" id="firstName" className="form-control" placeholder="Enter your first name" name="fname" value={userdetails.fname} onChange={onChange} required />
                         </div>
+
                         <div className="col">
                             <input type="text" id="lastName" className="form-control" placeholder="Enter your last name" name="lname" value={userdetails.lname} onChange={onChange} required />
                         </div>
                     </div>
-                    <div className="form-group pt-2">
 
-                    </div>
+
 
                     <div className="form-group pt-2">
                         <div>
@@ -199,7 +199,7 @@ const Customerregistration = () => {
                     <div className="form-group py-2">
                         <h4 className="display-flex">{message}</h4>
                         <div >
-                            <button className="btn btn-lg btn-success text-uppercase mt-3" onClick={customerreg}>Sign Up</button>
+                            <button style={{ width: "35%" }} className="btn  btn-success fw-bold my-2" onClick={customerreg}>Sign Up</button>
                         </div>
 
                     </div>

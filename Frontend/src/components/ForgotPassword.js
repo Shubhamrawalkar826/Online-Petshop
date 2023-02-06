@@ -47,7 +47,6 @@ export default class ForgotPassword extends Component {
                     message: response.data,
                     show: true
                 });
-                console.log(response.data);
             })
             .catch(error => {
                 this.setState({
@@ -55,9 +54,6 @@ export default class ForgotPassword extends Component {
                 })
                 toast.error("Invalid Email Id", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT });
                 //err.response.data => DTO on the server side : ErrorResponse
-
-
-                console.log(error);
             });
 
     }
@@ -67,11 +63,9 @@ export default class ForgotPassword extends Component {
 
     handleshow(value) {
         this.setState({ show: true, upid: value })
-        alert("show loaded" + value)
     }
 
     saveChanges(val) {
-        console.log(val, this.state.message);
         var regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z]).{5,}$/;;
         if (this.state.password === '' || regexPassword.test(this.state.password) !== true) {
             toast.error("Please enter valid password", { autoClose: 2000, position: toast.POSITION.TOP_RIGHT })
@@ -79,7 +73,6 @@ export default class ForgotPassword extends Component {
         }
         LoginAPI.savechanges(this.state.message, val).then(
             (resp) => {
-                console.log(resp.data);
                 toast.success(resp.data);
                 this.setState({
                     email: '',

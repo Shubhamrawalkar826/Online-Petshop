@@ -17,11 +17,6 @@ class LoginAPI {
 
     }
 
-    logoutAdmin() {
-        sessionStorage.removeItem("admin");
-        sessionStorage.removeItem("role");
-    }
-
     UpdateStatus(loginid, status) {
         return axios.get(USER_LOGIN_BASE_URL + '/updateStatus?loginid=' + loginid + '&status=' + status);
     }

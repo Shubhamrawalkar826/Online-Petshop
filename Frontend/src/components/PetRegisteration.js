@@ -69,6 +69,7 @@ export default class PetRegisteration extends Component {
 
         var formData = new FormData();
         formData.append("image", document.getElementById("image").files[0])
+
         formData.append("breedtypeid", this.state.breedid)
         formData.append("typeid", this.state.pettypeid)
         formData.append("cid", this.state.custid)
@@ -101,7 +102,9 @@ export default class PetRegisteration extends Component {
                 });
                 console.log(res);
                 toast.success('registration successful.');
-            });
+            }).catch((error) => {
+                toast.error('error while adding breed');
+            })
 
 
     }
@@ -121,7 +124,8 @@ export default class PetRegisteration extends Component {
             toast.success("Breed Added Successfully");
             console.log(res.data);
             this.setState({
-                breedid: res.data.breedtypeid
+                breedid: res.data.breedtypeid,
+                pettypeid: undefined
             })
             console.log(res.data.breedtypeid);
         }).catch((error) => {
@@ -135,29 +139,27 @@ export default class PetRegisteration extends Component {
             <div className='overflow-hidden'>
                 <CustNavBar />
                 <Container className='rounded bg-light pt-2' style={{ width: "30vw" }}><div>
-                    <h4 className="my-2">Pet Registration</h4>
+                    <h4 className="mt-2 mb-2">Pet Registration</h4><hr className='mb-4'></hr>
                     {this.state.typelist.length === 0 ? <h4 className='text-light'>Nothing in database</h4> :
                         <Form>
-
-                            <Form.Select value={this.state.pettypeid} onChange={this.handleChange}>
+                            <Form.Select className='text-center' value={this.state.pettypeid} onChange={this.handleChange}>
                                 <option selected disabled>Select Pet Type</option>
                                 {this.state.typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
                             </Form.Select>
-
                         </Form>
                     }
                     {this.state.breedlist.length === 0 ? <h6 className='text-light'>No pets in database</h6> :
-                        <Form className='mt-4'>
+                        <Form className='mt-3'>
 
-                            <Form.Select name="breedid" value={this.state.breedid} onChange={this.onChange}>
+                            <Form.Select className='text-center' name="breedid" value={this.state.breedid} onChange={this.onChange}>
                                 <option selected disabled>Select Breed Type</option>
                                 <option>other</option>
                                 {this.state.breedlist.map((breedlist) => (<option key={breedlist.breedtypeid} value={breedlist.breedtypeid}>{breedlist.breedname}</option>))}
                             </Form.Select>
 
                         </Form>
-                    }{this.state.breedid === "other" ? <Form><Form.Control className='my-2' name="bredname" type="text" value={this.state.bredname} onChange={this.onChange} placeholder="Enter new breedtype"></Form.Control><Button onClick={() => this.addNewBreed(this.state.pettypeid)}>Add new breed</Button></Form> : ""}</div>
-                    <Form className="container bg-light my-4">
+                    }{this.state.breedid === "other" ? <Form><Form.Control className='my-3' name="bredname" type="text" value={this.state.bredname} onChange={this.onChange} placeholder="Enter new breedtype"></Form.Control><Button onClick={() => this.addNewBreed(this.state.pettypeid)}>Add new breed</Button></Form> : ""}</div>
+                    <Form className="container bg-light mt-3">
                         <Form.Group className="mb-4" controlId="formBasicPassword">
                             <Form.Control className="text-center" id="image" name="image" type="file" value={this.state.image} onChange={this.onChange} placeholder="choose image" />
                         </Form.Group>
@@ -168,7 +170,7 @@ export default class PetRegisteration extends Component {
                             <Form.Control className="text-center" name="price" type="number" value={this.state.price} onChange={this.onChange} placeholder="Price" />
                         </Form.Group>
                         <h5>{this.state.message}</h5>
-                        <Button className="mb-4" onClick={this.ownerreg} variant="primary" >
+                        <Button className="mb-4 btn-lg" onClick={this.ownerreg} variant="success" >
                             Register
                         </Button>
                         <ToastContainer />

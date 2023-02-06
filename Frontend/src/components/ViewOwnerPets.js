@@ -78,8 +78,9 @@ function ViewOwnerPets() {
 
     return (
         <>
-            <div className="pb-4 overflow-hidden" >
-                <CustNavBar />
+            <CustNavBar />
+            <div className="pb-4 container overflow-hidden" >
+
                 {users.length === 0 ? <h4 className='text-light'>No Pets Sold yet</h4> :
                     <div> <h3 className='text-light'>Your Pets For Sell</h3>
                         <div className='mx-4'>
@@ -88,7 +89,7 @@ function ViewOwnerPets() {
                                 {
                                     users.map(
                                         users =>
-                                            <Card className="mx-2 my-2 py-2" style={{ width: '18rem' }}>
+                                            <Card className="mx-2 my-2 py-2" style={{ width: '16rem' }}>
                                                 <Col key={users.pid}>
 
                                                     <PetDisplay users={users}>
