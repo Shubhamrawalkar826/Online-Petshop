@@ -19,7 +19,6 @@ import ViewOwnerPets from './components/ViewOwnerPets';
 import PetRegisteration from './components/PetRegisteration';
 import PaymentDashboard from './components/PaymentDashboard';
 import ForgotPassword from './components/ForgotPassword';
-import Footer from './components/Footer';
 import { createContext, useReducer } from 'react';
 import { initialState, reducer } from './reducer/UseReducer';
 
@@ -60,7 +59,6 @@ function App() {
       <UserContext.Provider value={{ state1, dispatch }}>
         <NavBarComp />
         <Routing />
-        <Footer />
       </UserContext.Provider>
 
     </div>
