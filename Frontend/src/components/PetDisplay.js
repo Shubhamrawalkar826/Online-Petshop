@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 function PetDisplay(props) {
 
     const data = props.users.image;

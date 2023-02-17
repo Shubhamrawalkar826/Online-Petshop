@@ -16,7 +16,6 @@ export default class CustProfile extends Component {
     }
     componentDidMount() {
         let cust = JSON.parse(sessionStorage.getItem("customer"));
-        console.log(cust);
         this.setState({
             fname: cust.fname,
             lname: cust.lname,

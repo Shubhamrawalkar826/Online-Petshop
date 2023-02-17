@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import { Link, useNavigate } from 'react-router-dom';
 import BackButton from './BackButton';
 
 const PaymentDashboard = () => {
 
+    const navigate = useNavigate();
     const [address, setAddress] = useState('');
 
     useEffect(() => {
         let cust = JSON.parse(sessionStorage.getItem("customer"));
         console.log(cust);
         if (sessionStorage.getItem("role") == null) {
-            window.location.href = "/";
+            navigate("/");
         }
         setAddress(cust.address);
 

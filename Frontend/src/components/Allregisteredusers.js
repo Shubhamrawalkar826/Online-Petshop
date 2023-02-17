@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CustomerregistrationAPI from '../services/CustomerregistrationAPI';

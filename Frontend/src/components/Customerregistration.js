@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { Nav } from 'react-bootstrap'
-import {
-    Link
-} from "react-router-dom";
+
 import { ToastContainer, toast } from 'react-toastify'
 import CustomerregistrationAPI from "../services/CustomerregistrationAPI";
 import BackButton from "./BackButton";
@@ -147,7 +144,7 @@ const Customerregistration = () => {
 
     return (
         <div>
-            <div className="container overflow-hidden mb-2" style={{ minHeight: "100vh" }}>
+            <div className="container overflow-hidden" >
                 <div className="row mt-3">
                     <div className="col-sm-8">
                     </div>
@@ -155,7 +152,7 @@ const Customerregistration = () => {
                         <BackButton />
                     </div>
                 </div>
-                <form className="container rounded bg-light px-3 py-2 mb-5" style={{ width: "80vh" }}>
+                <form className="container rounded bg-light px-3 py-2 mb-3" style={{ width: "80vh" }}>
                     <h3 className="mt-2 ">Sign Up</h3><hr></hr>
                     <div className="form-group">
                         <div>

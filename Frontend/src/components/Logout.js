@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Nav } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 
@@ -18,7 +18,7 @@ export const Logout = () => {
     return (
         <>
 
-            <Nav.Link as={Link} onClick={logout} className="btn btn-danger mx-1 text-uppercase text-decoration-none " to="/">Logout</Nav.Link>
+            <Nav.Link as={Link} onClick={logout} className="text-light mx-1 text-decoration-none " to="/">Logout</Nav.Link>
 
         </>
     )

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import LoginAPI from '../services/LoginAPI';
-import { Nav } from 'react-bootstrap'
+import Nav from 'react-bootstrap/Nav'
 import {
   Link, useNavigate
 } from "react-router-dom";
@@ -75,7 +75,7 @@ export default function Login() {
         </div>
       </div>
       <form className="container rounded bg-light pt-2" style={{ width: "25rem" }}>
-
+        <h3 className='pt-1'>Login</h3><hr></hr>
         <div className="form-group">
           <input id="email" style={{ height: "3rem" }} type="email" className="form-control mt-3" placeholder="Email" name="email" value={logindetails.email} onChange={onChange} />
         </div>
@@ -99,7 +99,6 @@ export default function Login() {
       </form>
       <span id="span"></span>
     </div>
-
 
   );
 

@@ -11,9 +11,6 @@ const SearchPet = () => {
     const [typelist, setTypelist] = useState([]);
     const [flag, setFlag] = useState(true);
     const [pets, setPets] = useState([]);
-    const [message, setMessage] = useState('');
-
-
 
     const handleChange = (event) => {
 
@@ -30,9 +27,6 @@ const SearchPet = () => {
             window.location = "/"
         }
 
-        return () => {
-            console.log('search pet visited');
-        }
     }, [])
 
     const getallpetlist = () => {
@@ -72,8 +66,6 @@ const SearchPet = () => {
         };
         CustomerregistrationAPI.addcartitems(cart)
             .then(res => {
-                setMessage("Order added successfully.")
-                console.log(message, 'pet ID: ', cart.pid);
 
                 setPets(pets.filter(pets => pets.pid !== cart.pid))
                 setPetlist(petlist.filter(pets => pets.pid !== cart.pid))
@@ -87,7 +79,7 @@ const SearchPet = () => {
             <div className='container'>
 
                 {typelist.length === 0 ? "" :
-                    <Row className='justify-content-md-end'><Col md="auto">
+                    <Row className='justify-content-md-start'><Col md="auto">
 
                         <Form.Select style={{ width: "15rem" }} value={ptype} onChange={handleChange}>
                             <option className='text-center' selected disabled>Search for pet</option>
@@ -97,7 +89,7 @@ const SearchPet = () => {
 
                 }
             </div>
-            <div className="container my-4">
+            <div className="container mb-4">
                 {pets.length === 0 ? " " :
                     <div>
 
@@ -131,7 +123,7 @@ const SearchPet = () => {
                                 {
                                     petlist.map(
                                         users =>
-                                            <Card className="mx-2 my-3 py-2" style={{ width: '16rem' }}>
+                                            <Card className="mx-2 mb-3 py-2" style={{ width: '16rem' }}>
                                                 <Col key={users.pid}>
 
                                                     <PetDisplay users={users}>

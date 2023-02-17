@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 // const toLogin = () => {
@@ -27,10 +27,10 @@ const Home = () => {
 
     return (
         <>
-            <div className="d-flex flex-column justify-content-center w-100 h-100 position-fixed">
-                <h4 className="font-weight-bolder text-light text-uppercase">Online PetShop</h4>
-                <div className="container w-50">
-                    <p className="display-6 text-muted text-center">Buy or sell pets from this online pet shop</p>
+            <div style={{ height: "34rem" }} className="d-flex flex-column pt-5 mx-lg-5 justify-content-center w-60 position-absolute">
+                <h1 className="text-dark text-uppercase">Online PetShop</h1>
+                <div className="container">
+                    <p className="display-6  text-muted text-center">Buying and selling pets made easier</p>
                 </div>
                 {role ?
                     (<span>
@@ -43,7 +43,6 @@ const Home = () => {
                     </div>)
                 }
             </div>
-
         </>
     )
 }
