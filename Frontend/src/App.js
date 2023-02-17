@@ -19,35 +19,48 @@ import ViewOwnerPets from './components/ViewOwnerPets';
 import PetRegisteration from './components/PetRegisteration';
 import PaymentDashboard from './components/PaymentDashboard';
 import ForgotPassword from './components/ForgotPassword';
-import Footer from './components/Footer';
-import Practice from './components/Practice';
+import { createContext, useReducer } from 'react';
+import { initialState, reducer } from './reducer/UseReducer';
+
+const Routing = () => {
+  return (
+
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/home" element={<Home />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/customerregistration" element={<Customerregistration />} />
+      <Route exact path="/customerDashboard" element={<CustomerDashboard />} />
+      <Route exact path="/adminDashboard" element={<AdminDashboard />} />
+      <Route exact path="/about" element={<About />} />
+      <Route exact path="/allregisteredusers" element={<Allregisteredusers />} />
+      <Route exact path="/*" element={<ErrorPage />} />
+      <Route exact path="/searchpet" element={<SearchPet />} />
+      <Route exact path="/cart" element={<Cart />} />
+      <Route exact path="/profile" element={<CustProfile />} />
+      <Route exact path="/viewopets" element={<ViewOwnerPets />} />
+      <Route exact path="/petregistration" element={<PetRegisteration />} />
+      <Route exact path="/paymentDashboard" element={<PaymentDashboard />} />
+      <Route exact path="/forgotPassword" element={<ForgotPassword />} />
+
+    </Routes>
+  )
+}
+
+export const UserContext = createContext(initialState);
 
 function App() {
+
+  const [state1, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <div className="App" >
-      <NavBarComp />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/home" element={<Home />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/customerregistration" element={<Customerregistration />} />
-        <Route exact path="/customerDashboard" element={<CustomerDashboard />} />
-        <Route exact path="/adminDashboard" element={<AdminDashboard />} />
-        <Route exact path="/about" element={<About />} />
-        <Route exact path="/allregisteredusers" element={<Allregisteredusers />} />
-        <Route exact path="/*" element={<ErrorPage />} />
-        <Route exact path="/searchpet" element={<SearchPet />} />
-        <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/profile" element={<CustProfile />} />
-        <Route exact path="/viewopets" element={<ViewOwnerPets />} />
-        <Route exact path="/petregistration" element={<PetRegisteration />} />
-        <Route exact path="/paymentDashboard" element={<PaymentDashboard />} />
-        <Route exact path="/forgotPassword" element={<ForgotPassword />} />
-        <Route exact path="/practice" element={<Practice />} />
+    <div className='App'>
 
-      </Routes>
+      <UserContext.Provider value={{ state1, dispatch }}>
+        <NavBarComp />
+        <Routing />
+      </UserContext.Provider>
 
-      <Footer />
     </div>
   );
 }

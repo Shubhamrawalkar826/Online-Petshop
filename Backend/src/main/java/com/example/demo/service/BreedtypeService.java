@@ -47,4 +47,18 @@ public class BreedtypeService {
 		return t;
 				
 	}
+	
+	public Breedtype getByBreedname(String breedname) {
+		Optional<Breedtype> b= Optional.ofNullable(brepo.findByBreedname(breedname));
+		Breedtype t=null;
+		try {
+			t=b.get();
+		} catch (Exception e) {
+			// TODO: handle exception
+			t=null;
+			
+		}
+		return t;
+				
+	}
 }

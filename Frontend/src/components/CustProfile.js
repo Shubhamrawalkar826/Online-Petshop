@@ -16,7 +16,6 @@ export default class CustProfile extends Component {
     }
     componentDidMount() {
         let cust = JSON.parse(sessionStorage.getItem("customer"));
-        console.log(cust);
         this.setState({
             fname: cust.fname,
             lname: cust.lname,
@@ -30,12 +29,12 @@ export default class CustProfile extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='overflow-hidden'>
                 <CustNavBar />
-                <h2 className='text-light mt-5'>CustProfile</h2>
-                <Container className='bg-dark text-light rounded' style={{ minHeight: 250, width: 400 }}>
 
-                    <h5 className='pt-3 mb-4'>First Name: {this.state.fname}</h5>
+                <Container className='bg-light rounded' style={{ minHeight: 340, width: 500 }}>
+                    <h4 className='pt-3 mt-4'>Customer Profile</h4><hr className='mb-4'></hr>
+                    <h5 className='mb-4'>First Name: {this.state.fname}</h5>
                     <h5 className='mb-4'>Last Name: {this.state.lname}</h5>
                     <h5 className='mb-4'>Address: {this.state.address}</h5>
                     <h5 className='mb-4'>Contact Number: {this.state.contactno}</h5>

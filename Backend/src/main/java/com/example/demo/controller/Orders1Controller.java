@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entitites.Orders1;
 import com.example.demo.service.Orders1Service;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3100")
 @RestController
 public class Orders1Controller {
 

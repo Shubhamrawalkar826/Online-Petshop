@@ -16,8 +16,8 @@ import com.example.demo.service.CustomerService;
 import com.example.demo.service.LoginService;
 
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3100")
+//@CrossOrigin(origins = "*")
 @RestController
 public class CustomerController {
 

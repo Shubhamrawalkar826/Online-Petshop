@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entitites.TypeId;
 import com.example.demo.service.TypeIdService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3100")
 @RestController
 public class TypeIdController {
 

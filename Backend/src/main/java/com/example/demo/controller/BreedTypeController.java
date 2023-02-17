@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import com.example.demo.entitites.TypeId;
 import com.example.demo.repository.TypeIdRepository;
 import com.example.demo.service.BreedtypeService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3100")
 @RestController
 public class BreedTypeController {
 
@@ -25,6 +26,7 @@ public class BreedTypeController {
 	
 	@Autowired
 	TypeIdRepository tprepo;
+	
 	
 	@GetMapping("/showdata/{id}")
 	public List<Breedtype> getAll(@PathVariable("id") int typeid)
@@ -38,11 +40,17 @@ public class BreedTypeController {
 	}
 	
 	@PostMapping("/savebreed")
-	public Breedtype save(@RequestBody BreedtypeReg b)
+	public ResponseEntity<?> save(@RequestBody BreedtypeReg b)
 	{ 
 		TypeId tp = tprepo.findByTypeid(b.getTypeid());
+		Breedtype bd = bserv.getByBreedname(b.getBreedname());
+		if(bd==null) {
 		Breedtype bt = new Breedtype(b.getBreedtypeid(),b.getBreedname(),tp); 
-		return bserv.addData(bt);
+		return ResponseEntity.ok().body(bserv.addData(bt));
+		}
+		else {
+			return ResponseEntity.badRequest().body("Already exists");
+		}
 	}
 	
 }

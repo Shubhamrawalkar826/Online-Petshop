@@ -3,14 +3,18 @@ import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 import CustomerregistrationAPI from '../services/CustomerregistrationAPI';
 import CustNavBar from './CustNavBar';
 import PetDisplay from './PetDisplay';
+import Practice2 from './Practice2';
 
-const SearchPet = () => {
+const Practice3 = () => {
 
     const [petlist, setPetlist] = useState([]);
     const [ptype, setPtype] = useState(undefined);
     const [typelist, setTypelist] = useState([]);
     const [flag, setFlag] = useState(true);
     const [pets, setPets] = useState([]);
+    const [message, setMessage] = useState('');
+
+
 
     const handleChange = (event) => {
 
@@ -27,6 +31,9 @@ const SearchPet = () => {
             window.location = "/"
         }
 
+        return () => {
+            console.log('search pet visited');
+        }
     }, [])
 
     const getallpetlist = () => {
@@ -66,6 +73,8 @@ const SearchPet = () => {
         };
         CustomerregistrationAPI.addcartitems(cart)
             .then(res => {
+                setMessage("Order added successfully.")
+                console.log(message, 'pet ID: ', cart.pid);
 
                 setPets(pets.filter(pets => pets.pid !== cart.pid))
                 setPetlist(petlist.filter(pets => pets.pid !== cart.pid))
@@ -74,22 +83,22 @@ const SearchPet = () => {
     }
 
     return (
-        <div>
-            <CustNavBar />
-            <div className='container'>
-
+        <>
+            <div className='overflow-hidden'>
+                <CustNavBar />
                 {typelist.length === 0 ? "" :
-                    <Row className='justify-content-md-start'><Col md="auto">
-
-                        <Form.Select style={{ width: "15rem" }} value={ptype} onChange={handleChange}>
-                            <option className='text-center' selected disabled>Search for pet</option>
-                            {typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
-                        </Form.Select>
-                    </Col></Row>
-
+                    <Form className='mt-2'>
+                        <Form.Label className='text-light'>
+                            Select type of pet:
+                            <Form.Select value={ptype} onChange={handleChange}>
+                                <option selected disabled>select pet type</option>
+                                {typelist.map((typelist) => (<option key={typelist.typeid} value={typelist.typeid}>{typelist.typename}</option>))}
+                            </Form.Select>
+                        </Form.Label>
+                    </Form>
                 }
             </div>
-            <div className="container mb-4">
+            <div className="mx-4 my-4">
                 {pets.length === 0 ? " " :
                     <div>
 
@@ -97,11 +106,11 @@ const SearchPet = () => {
                             {
                                 pets.map(
                                     users =>
-                                        <Card className="mx-2 my-3 py-2" style={{ width: '16rem' }}>
+                                        <Card className="mx-2 my-3 py-2" style={{ width: '18rem' }}>
                                             <Col key={users.pid}>
 
-                                                <PetDisplay users={users}>
-                                                </PetDisplay>
+                                                <Practice2 users={users}>
+                                                </Practice2>
                                                 <div className='my-2'>
 
                                                     <Button className='px-4' onClick={() => { onAddtocart(users) }}>add to cart</Button>
@@ -115,7 +124,7 @@ const SearchPet = () => {
                     </div>
                 }
             </div>{flag ?
-                <div className="container my-4">
+                <div className="mx-4 my-4">
                     {petlist.length === 0 ? <h4>No Pets in Store</h4> :
                         <div>
 
@@ -123,11 +132,11 @@ const SearchPet = () => {
                                 {
                                     petlist.map(
                                         users =>
-                                            <Card className="mx-2 mb-3 py-2" style={{ width: '16rem' }}>
+                                            <Card className="mx-2 my-3 py-2" style={{ width: '18rem' }}>
                                                 <Col key={users.pid}>
 
-                                                    <PetDisplay users={users}>
-                                                    </PetDisplay>
+                                                    <Practice2 users={users}>
+                                                    </Practice2>
                                                     <div className='my-2'>
                                                         <Button className='px-4' onClick={() => { onAddtocart(users) }}>add to cart</Button>
                                                     </div>
@@ -140,8 +149,8 @@ const SearchPet = () => {
                         </div>
                     }
                 </div> : ''}
-        </div>
+        </>
     )
 }
 
-export default SearchPet
+export default Practice3

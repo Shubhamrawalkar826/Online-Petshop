@@ -22,8 +22,8 @@ import com.example.demo.service.CustomerService;
 import com.example.demo.service.PetService;
 import com.example.demo.service.TypeIdService;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-//@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:3100")
 @RestController
 public class PetController {
 

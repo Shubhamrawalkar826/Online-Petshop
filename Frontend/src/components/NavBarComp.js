@@ -1,26 +1,43 @@
-import React, { useState } from "react";
-import { Navbar, Nav, Container, Offcanvas, Button } from 'react-bootstrap'
+import React, { useContext, useState } from "react";
+import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap'
 import {
     Link
 } from "react-router-dom";
+import { UserContext } from "../App";
+import { Logout } from "./Logout";
 
 export default function NavBarComp() {
+
+    const { state1, dispatch } = useContext(UserContext);
+    console.log("inside navbar:" + state1);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     return (
         <div>
             <Navbar bg="dark" expand="lg">
-                <Container> <Navbar.Brand className="font-weight-bolder text-light" href="#home">Online PetShop</Navbar.Brand>
+                <Container> <Navbar.Brand className="font-weight-bolder text-uppercase text-light" href="#home"><b>Online PetShop</b></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link className="text-light" as={Link} to="/home">Home</Nav.Link>
                         </Nav>
-                        <Button variant="primary" onClick={handleShow}>
-                            About us
-                        </Button>
+                        <Nav >
+                            <Nav.Link className="font-weight-bolder mx-1 text-light" as={Link} to="/home">Home</Nav.Link>
+                        </Nav>
+                        <Nav.Link className="font-weight-bolder mx-1 text-light text-decoration-none" onClick={handleShow}>
+                            About
+                        </Nav.Link>
+                        {state1 ? <Nav>
+                            <Logout />
+                        </Nav> : <span><Nav>
+                            <Nav.Link as={Link} className="font-weight-bolder mx-1 text-light text-decoration-none " to="/login">Login</Nav.Link>
+                            <Nav.Link as={Link} className="font-weight-bolder text-light text-decoration-none " to="/customerregistration">Sign up</Nav.Link>
+                        </Nav></span>}
+
+
+
 
                     </Navbar.Collapse></Container>
             </Navbar>
@@ -40,7 +57,7 @@ export default function NavBarComp() {
                     <li>Gaurav Patil</li>
                 </Offcanvas.Body>
             </Offcanvas>
-        </div>
+        </div >
 
     )
 

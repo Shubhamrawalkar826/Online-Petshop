@@ -1,237 +1,134 @@
-import React, { Component } from 'react'
-import { Button, Modal } from 'react-bootstrap';
+
+import React, { useEffect, useState } from 'react'
+import { Button, Card, Col, Modal, Row } from 'react-bootstrap';
 import PetownerregistrationAPI from '../services/PetownerregistrationAPI';
-import CustNavBar from './CustNavBar';
-import PetDisplay from './PetDisplay';
+import CustNavBar from './CustNavBar'
+import PetDisplay from './PetDisplay'
 
-export default class ViewOwnerPets extends Component {
-    constructor(props) {
-        super(props)
+function ViewOwnerPets() {
 
-        this.state = {
-            users: [],
-            price: null,
-            upid: null,
-            show: false,
-            imgUrl: "",
-            data: [],
-            image: [],
-            toggle: false,
-            message: null
-        }
-        this.reloadUsersList = this.reloadUsersList.bind(this);
-        this.onDeletePet = this.onDeletePet.bind(this);
-        this.handleshow = this.handleshow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.setState = this.setState.bind(this)
-        this.loadImg = this.loadImg.bind(this);
-        this.forceUpdate = this.forceUpdate.bind(this)
-    }
+    const [users, setUsers] = useState([]);
+    const [message, setMessage] = useState('');
+    const [show, setShow] = useState(false);
+    const [price, setPrice] = useState('');
+    const [upid, setUpid] = useState('');
 
-    loadImg() {
-        let cust = JSON.parse(sessionStorage.getItem("customer"));
-        let custid = cust.cid;
-        PetownerregistrationAPI.fetchAllOwnerPets(custid)
-            .then(response =>
-                /*  response.data.map((p)=>{
-                      this.setState({data:[...this.data,p.image]});
-  
-                  })*/
-                // console.log(response.data)
-                this.setState({ data: response.data })
-            );
-        //  console.log(this.data);
-
-
-
-    }
-
-    componentDidMount() {
-        this.reloadUsersList();
+    useEffect(() => {
+        reloadUsersList();
         if (sessionStorage.getItem("role") == null) {
-            window.location = "/"
+            window.location = "/";
         }
-    }
 
-    /* reloadUsersList() {
-         let cust = JSON.parse(sessionStorage.getItem("customer"));
-         let custid = cust.cid;
-         PetownerregistrationAPI.fetchAllOwnerPets(custid)
-             .then((resp) => {
-                 this.setState({
-                     users: resp.data,
-                     message: "Owner pets rendered successfully"
-                 })
-                 console.log(this.state.message);
-             });
-     }*/
+        return () => {
+            console.log('owner pets visited');
+        }
+    }, []);
 
-    reloadUsersList() {
+    function reloadUsersList() {
         let cust = JSON.parse(sessionStorage.getItem("customer"));
         let custid = cust.cid;
-
         PetownerregistrationAPI.fetchAllOwnerPets(custid)
             .then((resp) => {
-                // const base64 = btoa(
-                //     new Uint8Array(resp.data).reduce(
-                //       (data, byte) => data + String.fromCharCode(byte),
-                //       ''
-                //     )
 
-                //   )
-                console.log(resp.data)
-                var arr = []
+                setUsers(resp.data)
+                setMessage("Owner pets rendered successfully")
 
-                console.log(arr)
-                this.setState(state => {
-                    // console.log(arr )
-                    return {
-                        users: resp.data,
-                        message: "Owner pets rendered successfully",
-                        //image: arr
-
-                    }
-
-                })
-                var count = 0;
-                var arr = []
-
-
-                resp.data.forEach(item => {
-                    //const getImg = async () => {
-                    fetch(`data:image/jpeg;base64,${item.image}`)
-                        .then(v => v.blob())
-                        .then(imageblob => {
-
-                            const reader = new FileReader();
-                            reader.readAsDataURL(imageblob);
-                            reader.onloadend = () => {
-                                const base64data = reader.result;
-                                count++
-                                arr.push(base64data)
-                                if (count == resp.data.length) {
-                                    this.setState(state => {
-                                        return {
-                                            image: arr
-                                        }
-                                    })
-
-                                }
-
-
-                            };
-                        }
-                        )
-                    // const response = await fetch(`data:image/jpeg;base64,${item.image}`);
-                    // const imageBlob = await response.blob();
-                    // const reader = new FileReader();
-                    // reader.readAsDataURL(imageBlob);
-                    // reader.onloadend = () => {
-                    //     const base64data = reader.result;
-                    //     //arr.push(base64data)
-                    // };
-                }
-
-                    //arr.push(item.image)
-                    //   getImg()
-                    //  }
-                )
-                console.log(this.state.message);
+                console.log(message);
             });
     }
 
-    onDeletePet = pid => {
+
+
+    function onDeletePet(pid) {
         if (window.confirm("Are you sure you want to delete this pet?")) {
             PetownerregistrationAPI.deleteOwnedPet(pid)
                 .then(res => {
-                    this.setState({ message: 'Pet deleted successfully.' });
-                    console.log(this.state.message, 'Pet ID: ', pid);
-                    this.setState({ users: this.state.users.filter(users => users.pid !== pid) });
+                    setMessage('Pet deleted successfully.');
+                    console.log(message, 'Pet ID: ', pid);
+                    setUsers(users.filter(users => users.pid !== pid));
                 })
         } else
             console.log("request cancelled");
     }
 
-    handleClose() {
-        this.setState({ show: false })
+    function handleClose() {
+        setShow(false)
     }
 
-    handleshow(value) {
-        this.setState({ show: true, upid: value })
+    function handleshow(value) {
+        setShow(true); setUpid(value);
     }
 
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+    function onChange(e) {
+        setPrice(e.target.value);
     }
 
-    saveChanges(val, upid) {
+    function saveChanges(val, upid) {
         console.log(val, upid);
         PetownerregistrationAPI.updateOwnedPet(val, upid)
             .then(res => {
-                this.setState({
-                    message: 'Pet updated successfully.',
-                    price: ''
-                });
-                console.log(this.state.message, 'Pet ID: ', upid);
-                this.reloadUsersList();
+                setMessage('Pet updated successfully.');
+                setPrice('');
+
+                console.log(message, 'Pet ID: ', upid);
+                reloadUsersList();
             })
-        this.setState({ show: false })
+        setShow(false);
     }
 
-    render() {
-        return (
-            <div className='container'>
-                <CustNavBar />
-                {this.state.users.length === 0 ? <h3 className='text-light'>No Pets Sold yet</h3> :
+    return (
+        <>
+            <CustNavBar />
+            <div className="pb-4 container overflow-hidden" >
+
+                {users.length === 0 ? <h4 className='text-light'>No Pets Sold yet</h4> :
                     <div> <h3 className='text-light'>Your Pets For Sell</h3>
+                        <div className='mx-4'>
+                            <Row>
 
-                        <table className="table text-light table-bordered">
-                            <thead className="bg-dark text-light">
-                                <tr>
-                                    <th className="visually-hidden">Id</th>
-                                    <th>PId</th>
-                                    <th>Image</th>
-                                    <th>Breed</th>
-                                    <th>Age</th>
-                                    <th>Price</th>
-                                    <th>Pet Type</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody className='bg-light text-dark'>
                                 {
-                                    this.state.users.map(
+                                    users.map(
                                         users =>
-                                            <tr key={users.pid}>
-                                                <PetDisplay users={users} message={this.state.message} setState={this.setState} state={this.state}
-                                                    forceUpdate={this.forceUpdate}>
-                                                </PetDisplay>
-                                                <td><Button onClick={() => { this.handleshow(users.pid) }}>update</Button><Button className="btn-danger" onClick={() => { this.onDeletePet(users.pid) }}>delete</Button></td>
+                                            <Card className="mx-2 my-2 py-2" style={{ width: '16rem' }}>
+                                                <Col key={users.pid}>
 
-                                            </tr>
+                                                    <PetDisplay users={users}>
+                                                    </PetDisplay>
+                                                    <div className='mt-2'>
+                                                        <Button
+                                                            onClick={() => { handleshow(users.pid) }}>update</Button><Button className="btn-danger mx-2" onClick={() => { onDeletePet(users.pid) }}>delete</Button>
+
+                                                    </div>
+                                                </Col>
+                                            </Card>
+
                                     )
-                                }
-                            </tbody>
-                        </table>
+                                }</Row></div>
                     </div>
-                }<Modal show={this.state.show} onHide={this.handleClose}>
+                }<Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Updating price for Pid: {this.state.upid}</Modal.Title>
+                        <Modal.Title>Updating price</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <input type="number" className="form-control" placeholder="Enter Price " name="price" value={this.state.price} onChange={this.onChange} required />
-                        <Button variant="primary" onClick={() => { this.saveChanges(this.state.price, this.state.upid) }}>
+                        <input type="number" className="form-control mb-2" placeholder="Enter Price " name="price" value={price} onChange={onChange} required />
+                        <Button variant="primary" onClick={() => { saveChanges(price, upid) }}>
                             Save Changes
                         </Button>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
+                        <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
 
                     </Modal.Footer>
                 </Modal>
             </div>
-        )
-    }
+        </>
+    )
 }
+
+export default ViewOwnerPets
+
+
+
+
