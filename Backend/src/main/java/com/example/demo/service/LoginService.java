@@ -63,7 +63,9 @@ public class LoginService {
 			else if(role.equals("admin"))
 			{
 				//if (passwordEncoder.matches(password, l.getPassword())) {
+				if(password.equals(l.getPassword())) {
 				o = lrepo.getAdmin();
+				}
 				//}
 			}
 		}
