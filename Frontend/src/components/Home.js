@@ -27,9 +27,9 @@ const Home = () => {
 
     return (
         <>
-            <div style={{ height: "34rem" }} className="d-flex flex-column pt-5 mx-lg-5 justify-content-center w-60 position-absolute">
+            <div style={{ height: "34rem", margin: "auto auto auto 7rem" }} className="d-flex flex-column pt-5 justify-content-center w-60 position-absolute">
                 <h1 className="text-dark text-uppercase">Online PetShop</h1>
-                <div className="container">
+                <div style={{ width: "35rem" }} className="container">
                     <p className="display-6  text-muted text-center">Buying and selling pets made easier</p>
                 </div>
                 {role ?
@@ -38,7 +38,7 @@ const Home = () => {
                         <Button className='btn-secondary btn-lg' onClick={() => navigate(-1)}>BACK</Button>
                     </span>) :
                     (<div>
-                        <NavLink className="btn btn-lg btn-outline-light text-uppercase text-decoration-none mx-3" to="/login">Login</NavLink>
+                        <NavLink className="btn btn-lg text-dark btn-outline-light text-uppercase text-decoration-none mx-3" to="/login">Login</NavLink>
                         <NavLink className="btn btn-lg btn-dark text-uppercase text-decoration-none mx-3" to="/customerregistration">Sign Up</NavLink>
                     </div>)
                 }
