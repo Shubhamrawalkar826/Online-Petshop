@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify'
 import CustomerregistrationAPI from "../services/CustomerregistrationAPI";
 import BackButton from "./BackButton";
+import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 const Customerregistration = () => {
@@ -152,8 +154,8 @@ const Customerregistration = () => {
                         <BackButton />
                     </div>
                 </div>
-                <form className="container rounded bg-light px-3 py-2 mb-3" style={{ width: "80vh" }}>
-                    <h3 className="mt-2 ">Sign Up</h3><hr></hr>
+                <form className="container rounded form-control mb-3" style={{ width: "80vh" }}>
+                    <div ><h5 className="mt-2 justify-content-start ">Sign Up</h5><hr></hr></div>
                     <div className="form-group">
                         <div>
                             <input type="email" id="email" className="form-control" placeholder="Enter Email Address" name="email" value={userdetails.email} onChange={onChange} onFocus={removeWarnings} onBlur={validateEmail} /><span style={{ color: 'red' }} id='emailVr'></span>
@@ -196,9 +198,12 @@ const Customerregistration = () => {
                     <div className="form-group py-2">
                         <h4 className="display-flex">{message}</h4>
                         <div >
-                            <button style={{ width: "35%" }} className="btn  btn-success fw-bold my-2" onClick={customerreg}>Sign Up</button>
+                            <button style={{ width: "35%" }} className="btn btn-success fw-bold my-2" onClick={customerreg}>Sign Up</button>
                         </div>
 
+                    </div>
+                    <div className='mb-3'>
+                        <Nav.Link as={Link} to='/login'>Already registered?<h6 className='btn fw-bold text-primary'>Log in</h6></Nav.Link>
                     </div>
                     <ToastContainer />
                 </form>

@@ -74,8 +74,8 @@ export default function Login() {
           <Nav.Link as={Link} to='/home'><h6 className='btn btn-secondary px-4 text-uppercase offset-8'>Back</h6></Nav.Link>
         </div>
       </div>
-      <form className="container rounded bg-light pt-2" style={{ width: "25rem" }}>
-        <h3 className='pt-1'>Login</h3><hr></hr>
+      <form className="container form-control rounded pt-2" style={{ width: "25rem" }}>
+        <h4 className='pt-1'>Log in</h4><hr></hr>
         <div className="form-group">
           <input id="email" style={{ height: "3rem" }} type="email" className="form-control mt-3" placeholder="Email" name="email" value={logindetails.email} onChange={onChange} />
         </div>
@@ -84,17 +84,16 @@ export default function Login() {
         </div>
         <div>
           <div>
-            <button style={{ width: "100%" }} className="btn btn-lg btn-primary fw-bold mb-1" onClick={userlogin} >Log in</button>
+            <button style={{ width: "60%" }} className="btn btn-lg btn-primary fw-bold mb-1" onClick={userlogin} >Log in</button>
             <ToastContainer />
           </div>
-          <h5>{message}</h5>
+          <h5 className='text-danger'>{message}</h5>
         </div>
         <div>
           <Nav.Link as={Link} to='/forgotPassword'><h4 className='btn text-decoration-none btn-link mb-2 '>Forgot Password?</h4></Nav.Link>
         </div><hr></hr>
-        <div>
-
-          <Nav.Link as={Link} to='/customerregistration'><h6 className='btn btn-lg btn-success mb-4'>Create New Account</h6></Nav.Link>
+        <div className='mb-3'>
+          <Nav.Link as={Link} to='/customerregistration'>Don't have an account?<h6 className='btn fw-bold text-success'>Sign Up</h6></Nav.Link>
         </div>
       </form>
       <span id="span"></span>

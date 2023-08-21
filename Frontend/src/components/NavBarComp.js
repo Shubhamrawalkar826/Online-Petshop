@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap'
+import { Navbar, Nav, Offcanvas } from 'react-bootstrap'
 import {
     Link
 } from "react-router-dom";
@@ -17,32 +17,32 @@ export default function NavBarComp() {
 
     return (
         <div>
-            <Navbar bg="dark" expand="lg">
-                <Container> <Navbar.Brand className="font-weight-bolder text-uppercase text-light" href="#home"><b>Online PetShop</b></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                        </Nav>
-                        <Nav >
-                            <Nav.Link className="font-weight-bolder mx-1 text-light" as={Link} to="/home">Home</Nav.Link>
-                        </Nav>
-                        <Nav.Link className="font-weight-bolder mx-1 text-light text-decoration-none" onClick={handleShow}>
-                            About
-                        </Nav.Link>
-                        {state1 ? <Nav>
-                            <Logout />
-                        </Nav> : <span><Nav>
-                            <Nav.Link as={Link} className="font-weight-bolder mx-1 text-light text-decoration-none " to="/login">Login</Nav.Link>
-                            <Nav.Link as={Link} className="font-weight-bolder text-light text-decoration-none " to="/customerregistration">Sign up</Nav.Link>
-                        </Nav></span>}
+            <Navbar className="px-5" bg="dark" expand="lg">
+                <Navbar.Brand className="font-weight-bolder text-uppercase text-light" href="#home"><b>Online PetShop</b></Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                    </Nav>
+                    <Nav >
+                        <Nav.Link className="font-weight-bolder mx-1 text-light" as={Link} to="/home">Home</Nav.Link>
+                    </Nav>
+                    <Nav.Link className="font-weight-bolder mx-1 text-light text-decoration-none" onClick={handleShow}>
+                        About
+                    </Nav.Link>
+                    {state1 ? <Nav>
+                        <Logout />
+                    </Nav> : <span><Nav>
+                        <Nav.Link as={Link} className="font-weight-bolder mx-1 text-light text-decoration-none " to="/login">Login</Nav.Link>
+                        <Nav.Link as={Link} className="font-weight-bolder text-light text-decoration-none " to="/customerregistration">Sign up</Nav.Link>
+                    </Nav></span>}
 
 
 
 
-                    </Navbar.Collapse></Container>
+                </Navbar.Collapse>
             </Navbar>
             <Offcanvas placement="top" show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton>
+                <Offcanvas.Header className="text-center" closeButton>
                     <Offcanvas.Title>About us</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
